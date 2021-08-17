@@ -11,6 +11,7 @@ import Palette from './components/palette'
 
 
 // TODO
+// Font face en ghpages
 // EditorTools -> SpriteEditorTools
 // Numero del bloque visible
 // Herramientas de sheet

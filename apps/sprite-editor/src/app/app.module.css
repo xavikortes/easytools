@@ -5,11 +5,6 @@ menu, nav, section, video {
   margin: 0; padding: 0; font-size: 100%; list-style: none; border: 0;
 }
 
-@font-face {
-  font-family: 'FreePixel';
-  src: local('FreePixel'), url('/assets/fonts/FreePixel.ttf') format('truetype');
-}
-
 :root {
   --menu-background: #deded6;
   --menu-tags-background: #333d51;
@@ -30,8 +25,8 @@ menu, nav, section, video {
   bottom: 0;
   display: flex;
   justify-content: center;
-  font-family: 'FreePixel';
-  font-weight: bold;
+  font-family: 'PF Tempesta Seven Condensed', sans-serif;
+  font-size: 0.9em;
   background-color: #304c6d;
 }
 
