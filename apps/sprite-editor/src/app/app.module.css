@@ -60,7 +60,13 @@ menu, nav, section, video {
 }
 
 .paletteListItem {
+  display: flex;
+  align-items: center;
   margin: 0% 0% 10%;
+}
+
+.paletteListItemRadio {
+  margin-right: 5%;
 }
 
 .spriteEditor {

@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import styles from './app.module.css';
 
-import { Block, Sheet, SpriteEditorMode } from './types'
+import { Block, Sheet, ColorPalette, SpriteEditorMode } from './types'
 import { SHEET_WIDTH, SHEET_HEIGHT, BLOCK_SIZE, INITIAL_COLOR } from './config'
+import { paletteList } from './data';
 
 import Menu from './components/menu'
 import Canvas from './components/canvas'
@@ -11,142 +12,43 @@ import Palette from './components/palette'
 
 
 // TODO
-// Font face en ghpages
-// EditorTools -> SpriteEditorTools
-// Numero del bloque visible
+// Edicion de Colores
 // Herramientas de sheet
 // Ver rendimiento de sheet (cargar pngs en lugar de pixels?)
 // Separar comps (lo mas eficaz posible)
 // Spritesheet solo debe ser un canvas, que se pinta de otra manera
-// Cambiar gestion de Palette en Editor
-// Edicion de Colores (PaletteEditor???) (interconectados??)
 // Cursores en general pixelados + pointer + colorpicker en palette?
+// Type Sheet -> SpriteSheet
+// SpriteEditorMode -> AppMode?
 
 // paletas, herramientas y comportamientos  (https://apps.lospec.com/pixel-editor)
 
-const paletteList = [
-  {
-    name: 'Sweetie',
-    colors: [
-      [26, 28, 44, 1],
-      [93, 39, 93, 1],
-      [177, 62, 83, 1],
-      [239, 125, 87, 1],
-      [255, 205, 117, 1],
-      [167, 240, 112, 1],
-      [56, 183, 100, 1],
-      [37, 113, 121, 1],
-      [41, 54, 111, 1],
-      [59, 93, 201, 1],
-      [65, 166, 246, 1],
-      [115, 239, 247, 1],
-      [244, 244, 244, 1],
-      [148, 176, 194, 1],
-      [86, 108, 134, 1],
-      [51, 60, 87, 1]
-    ]
-  },
-  {
-    name: 'Island Joy',
-    colors: [
-      [255, 255, 255, 1],
-      [109, 247, 193, 1],
-      [17, 173, 193, 1],
-      [96, 108, 129, 1],
-      [57, 52, 87, 1],
-      [30, 136, 117, 1],
-      [91, 179, 97, 1],
-      [161, 229, 90, 1],
-      [247, 228, 118, 1],
-      [249, 146, 82, 1],
-      [203, 77, 104, 1],
-      [106, 55, 113, 1],
-      [201, 36, 100, 1],
-      [244, 140, 182, 1],
-      [247, 182, 158, 1],
-      [155, 156, 130, 1]
-    ]
-  },
-  {
-    name: 'Endesga',
-    colors: [
-      [228, 165, 114, 1],
-      [184, 111, 80, 1],
-      [116, 63, 57, 1],
-      [63, 40, 50, 1],
-      [158, 40, 53, 1],
-      [229, 59, 68, 1],
-      [251, 146, 43, 1],
-      [255, 231, 98, 1],
-      [99, 198, 77, 1],
-      [50, 115, 69, 1],
-      [25, 61, 63, 1],
-      [79, 103, 129, 1],
-      [175, 191, 210, 1],
-      [255, 255, 255, 1],
-      [44, 232, 244, 1],
-      [4, 132, 209, 1]
-    ]
-  },
-  {
-    name: 'Bubblegum',
-    colors: [
-      [22, 23, 26, 1],
-      [127, 6, 34, 1],
-      [214, 36, 17, 1],
-      [255, 132, 38, 1],
-      [255, 209, 0, 1],
-      [250, 253, 255, 1],
-      [255, 128, 164, 1],
-      [255, 38, 116, 1],
-      [148, 33, 106, 1],
-      [67, 0, 103, 1],
-      [35, 73, 117, 1],
-      [104, 174, 212, 1],
-      [191, 255, 60, 1],
-      [16, 210, 117, 1],
-      [0, 120, 153, 1],
-      [0, 40, 89, 1]
-    ]
-  },
-  {
-    name: 'Pico-8',
-    colors: [
-      [0, 0, 0, 1],
-      [29, 43, 83, 1],
-      [126, 37, 83, 1],
-      [0, 135, 81, 1],
-      [171, 82, 54, 1],
-      [95, 87, 79, 1],
-      [194, 195, 199, 1],
-      [255, 241, 232, 1],
-      [255, 0, 77, 1],
-      [255, 163, 0, 1],
-      [255, 236, 39, 1],
-      [0, 228, 54, 1],
-      [41, 173, 255, 1],
-      [131, 118, 156, 1],
-      [255, 119, 168, 1],
-      [255, 204, 170, 1]
-    ]
-  }
-]
 
 type PaletteEditorProps = {
+  isPaletteActive: (palette: ColorPalette) => boolean,
+  onChangePalette: (palette: ColorPalette) => void
 }
 
-const PaletteEditor = ({ }: PaletteEditorProps) => {
+const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps) => {
   return (
     <div className={ styles.paletteEditor }>
       <ul className={ styles.paletteList }>
         {
-          paletteList.map((palette, idx) =>
+          Object.values(paletteList).map((palette, idx) =>
             <li
               key={ idx }
               className={ styles.paletteListItem }>
-                { palette.name }
+                <input
+                  type="radio"
+                  className={ styles.paletteListItemRadio }
+                  name="fav_language"
+                  value={ palette.name }
+                  checked={ isPaletteActive(palette) }
+                  onClick={ () => onChangePalette(palette) }
+                  onChange={ () => { /* Error fix */} }
+                />
                 <Palette
-                  palette={ palette.colors }
+                  palette={ palette }
                 />
             </li>
           )
@@ -158,12 +60,13 @@ const PaletteEditor = ({ }: PaletteEditorProps) => {
 
 
 type SpriteEditorProps = {
+  palette: ColorPalette,
   sheet: Sheet,
   setSheet: (sheet: Sheet) => void,
   selectedBlock: number
 }
 
-const SpriteEditor = ({ sheet, setSheet, selectedBlock }: SpriteEditorProps) => {
+const SpriteEditor = ({ palette, sheet, setSheet, selectedBlock }: SpriteEditorProps) => {
   const [selectedColor, setSelectedColor] = useState(INITIAL_COLOR)
 
   const setBlock = (block: Block) => {
@@ -177,7 +80,7 @@ const SpriteEditor = ({ sheet, setSheet, selectedBlock }: SpriteEditorProps) => 
   return (
     <div className={ styles.spriteEditor }>
       <span className={ styles.blockTitle }>
-        { `#${selectedBlock.toString().padStart(3, '0')}` }
+        { `#${(selectedBlock + 1).toString().padStart(3, '0')}` }
       </span>
       <Canvas
         block={ sheet[selectedBlock] }
@@ -188,24 +91,7 @@ const SpriteEditor = ({ sheet, setSheet, selectedBlock }: SpriteEditorProps) => 
         block={ sheet[selectedBlock] }
       />
       <Palette
-        palette={[
-          [26, 28, 44, 1],
-          [93, 39, 93, 1],
-          [177, 62, 83, 1],
-          [239, 125, 87, 1],
-          [255, 205, 117, 1],
-          [167, 240, 112, 1],
-          [56, 183, 100, 1],
-          [37, 113, 121, 1],
-          [41, 54, 111, 1],
-          [59, 93, 201, 1],
-          [65, 166, 246, 1],
-          [115, 239, 247, 1],
-          [244, 244, 244, 1],
-          [148, 176, 194, 1],
-          [86, 108, 134, 1],
-          [51, 60, 87, 1]
-        ]}
+        palette={ palette }
         isColorActive={ color => color.toString() === selectedColor.toString() }
         onColorClicked={ color => setSelectedColor(color) }
       />
@@ -296,6 +182,7 @@ export function App() {
   const [sheet, setSheet] = useState(createSheet)
   const [selectedBlock, setSelectedBlock] = useState(0)
   const [mode, setMode] = useState('sprite' as SpriteEditorMode)
+  const [currentPalette, setCurrentPalette] = useState(Object.values(paletteList)[0])
 
   return (
     <Container>
@@ -307,11 +194,15 @@ export function App() {
         <div className={ styles.app }>
           {
             mode === 'palette' &&
-            <PaletteEditor />
+            <PaletteEditor
+              isPaletteActive={ palette => Object.values(palette).toString() === Object.values(currentPalette).toString() }
+              onChangePalette={ palette => setCurrentPalette(palette) }
+            />
           }
           {
             mode === 'sprite' &&
             <SpriteEditor
+              palette={ currentPalette }
               sheet={ sheet }
               setSheet={ setSheet }
               selectedBlock={ selectedBlock }

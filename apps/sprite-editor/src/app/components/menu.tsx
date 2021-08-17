@@ -3,8 +3,6 @@ import styles from './menu.module.css'
 import { SpriteEditorMode } from '../types'
 
 // TODO
-// Me gusta representacion de palette
-// Me gusta el pikachu como representacion de sprite
 // Cambiar caterpie por 4 pokemones para representar sheet
 
 type MenuProps = {
