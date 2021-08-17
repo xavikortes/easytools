@@ -28,7 +28,7 @@
     "predeploy": "nx build",
     "deploy": "gh-pages -d dist/apps/sprite-editor"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "core-js": "^3.6.5",
     "react": "17.0.2",
