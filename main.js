@@ -11,7 +11,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "../../../node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "html, body, div, span, a, h1, h2, h3, h4, h5, h6, p,\nblockquote, img, ol, ul, li, input, label, select,\ntable, tbody, tfoot, thead, tr, th, td, footer, header,\nmenu, nav, section, video {\n  margin: 0; padding: 0; font-size: 100%; list-style: none; border: 0;\n}\n\n@font-face {\n  font-family: 'FreePixel';\n  src: local('FreePixel'), url('https://xavikortes.github.io/easytools/assets/fonts/FreePixel.ttf') format('truetype');\n}\n\n:root {\n  --menu-background: #deded6;\n  --menu-tags-background: #333d51;\n  --menu-tags-active: #ed7147;\n  --app-background: #566c86;\n  --canvas-background: #1a1c2c;\n  --canvas-border: 2px solid #deded6;\n  --canvas-shadow: 0px 0.25em 0.25em 0px #1a1c2c;\n  --canvas-item-border: 1px solid #333;\n  --palette-item-border: 2px solid #1a1c2c;\n}\n\n.app_container__2kNhW {\n  width: 100%;\n  min-height: 100%;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  display: flex;\n  justify-content: center;\n  font-family: 'FreePixel';\n  font-weight: bold;\n  background-color: #304c6d;\n}\n\n.app_container__2kNhW > * {\n  max-width: 480px;\n}\n\n.app_wrapper__2ckbR {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n}\n\n.app_app__j3Q8W {\n  flex-grow: 1;\n  display: flex;\n  align-items: stretch;\n  background-color: var(--app-background);\n  overflow-y: auto;\n}\n\n.app_paletteEditor__Icvu8 {\n  flex-grow: 1;\n  padding: 10% 15%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n.app_paletteListItem__JWw_N {\n  margin: 0% 0% 10%;\n}\n\n.app_spriteEditor__1pb48 {\n  flex-grow: 1;\n  min-height: 650px;\n  padding: 10% 15%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n.app_blockTitle__2ZdBu {\n  max-height: 50px;\n  display: flex;\n  justify-content: center;\n  color: var(--menu-background);\n  font-size: 3em;\n  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);\n}\n\n.app_spriteSheetEditor__2H-ct {\n  flex-grow: 1;\n  min-height: 650px;\n  padding: 2%;\n  display: flex;\n  box-sizing: border-box;\n  flex-direction: column;\n  justify-content: center;\n}\n\n.app_spritesheet__--jAq {\n  display: flex;\n  flex-wrap: wrap;\n  background-color: var(--canvas-background);\n  border: var(--canvas-border);\n  box-shadow: var(--canvas-shadow);\n}\n\n.app_block__1jaU4 {\n  border: var(--canvas-item-border);\n  position: relative;\n  box-sizing: border-box;\n  height: 0;\n  display: flex;\n  flex-wrap: wrap;\n}\n\n.app_block__1jaU4 .app_pixel__iXVnc {\n  border: none;\n}\n\n.app_selected__i5P3z {\n  box-shadow: 0px 0px 0px 0.1em white inset;\n}\n", ""]);
+exports.push([module.i, "html, body, div, span, a, h1, h2, h3, h4, h5, h6, p,\nblockquote, img, ol, ul, li, input, label, select,\ntable, tbody, tfoot, thead, tr, th, td, footer, header,\nmenu, nav, section, video {\n  margin: 0; padding: 0; font-size: 100%; list-style: none; border: 0;\n}\n\n@font-face {\n  font-family: 'FreePixel';\n  src: local('FreePixel'), url('/assets/fonts/FreePixel.ttf') format('truetype');\n}\n\n:root {\n  --menu-background: #deded6;\n  --menu-tags-background: #333d51;\n  --menu-tags-active: #ed7147;\n  --app-background: #566c86;\n  --canvas-background: #1a1c2c;\n  --canvas-border: 2px solid #deded6;\n  --canvas-shadow: 0px 0.25em 0.25em 0px #1a1c2c;\n  --canvas-item-border: 1px solid #333;\n  --palette-item-border: 2px solid #1a1c2c;\n}\n\n.app_container__2kNhW {\n  width: 100%;\n  min-height: 100%;\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  display: flex;\n  justify-content: center;\n  font-family: 'FreePixel';\n  font-weight: bold;\n  background-color: #304c6d;\n}\n\n.app_container__2kNhW > * {\n  max-width: 480px;\n}\n\n.app_wrapper__2ckbR {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: stretch;\n}\n\n.app_app__j3Q8W {\n  flex-grow: 1;\n  display: flex;\n  align-items: stretch;\n  background-color: var(--app-background);\n  overflow-y: auto;\n}\n\n.app_paletteEditor__Icvu8 {\n  flex-grow: 1;\n  padding: 10% 15%;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n.app_paletteListItem__JWw_N {\n  margin: 0% 0% 10%;\n}\n\n.app_spriteEditor__1pb48 {\n  flex-grow: 1;\n  min-height: 650px;\n  padding: 10% 15%;\n  box-sizing: border-box;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n.app_blockTitle__2ZdBu {\n  max-height: 50px;\n  display: flex;\n  justify-content: center;\n  color: var(--menu-background);\n  font-size: 3em;\n  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);\n}\n\n.app_spriteSheetEditor__2H-ct {\n  flex-grow: 1;\n  min-height: 650px;\n  padding: 2%;\n  display: flex;\n  box-sizing: border-box;\n  flex-direction: column;\n  justify-content: center;\n}\n\n.app_spritesheet__--jAq {\n  display: flex;\n  flex-wrap: wrap;\n  background-color: var(--canvas-background);\n  border: var(--canvas-border);\n  box-shadow: var(--canvas-shadow);\n}\n\n.app_block__1jaU4 {\n  border: var(--canvas-item-border);\n  position: relative;\n  box-sizing: border-box;\n  height: 0;\n  display: flex;\n  flex-wrap: wrap;\n}\n\n.app_block__1jaU4 .app_pixel__iXVnc {\n  border: none;\n}\n\n.app_selected__i5P3z {\n  box-shadow: 0px 0px 0px 0.1em white inset;\n}\n", ""]);
 // Exports
 exports.locals = {
 	"container": "app_container__2kNhW",
@@ -878,7 +878,7 @@ const Menu = ({
           lineNumber: 31,
           columnNumber: 11
         }, undefined), /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__["jsxDEV"])("img", {
-          src: "https://xavikortes.github.io/easytools/assets/palette.png",
+          src: "assets/palette.png",
           className: _menu_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolbuttonImg
         }, void 0, false, {
           fileName: _jsxFileName,
@@ -901,7 +901,7 @@ const Menu = ({
           lineNumber: 42,
           columnNumber: 11
         }, undefined), /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__["jsxDEV"])("img", {
-          src: "https://xavikortes.github.io/easytools/assets/pikachu.png",
+          src: "assets/pikachu.png",
           className: _menu_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolbuttonImg
         }, void 0, false, {
           fileName: _jsxFileName,
@@ -924,7 +924,7 @@ const Menu = ({
           lineNumber: 53,
           columnNumber: 11
         }, undefined), /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_1__["jsxDEV"])("img", {
-          src: "https://xavikortes.github.io/easytools/assets/caterpie.png",
+          src: "assets/caterpie.png",
           className: _menu_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolbuttonImg
         }, void 0, false, {
           fileName: _jsxFileName,
@@ -1119,7 +1119,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('pencil'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/pencil.png",
+        src: "assets/pencil.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1134,7 +1134,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('picker'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/picker.png",
+        src: "assets/picker.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1149,7 +1149,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('trash'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/trash.png",
+        src: "assets/trash.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1164,7 +1164,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('pikachu'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/pikachu.png",
+        src: "assets/pikachu.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1179,7 +1179,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('seta'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/seta.png",
+        src: "assets/seta.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1194,7 +1194,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('caterpie'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/caterpie.png",
+        src: "assets/caterpie.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1209,7 +1209,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => console.log('ash'),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/ash.png",
+        src: "assets/ash.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
@@ -1224,7 +1224,7 @@ const SpriteEditorTools = ({
       className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButton,
       onClick: () => downloadPNG(block),
       children: /*#__PURE__*/Object(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_2__["jsxDEV"])("img", {
-        src: "https://xavikortes.github.io/easytools/assets/download.png",
+        src: "assets/download.png",
         className: _sprite_editor_tools_module_css__WEBPACK_IMPORTED_MODULE_0___default.a.toolButtonImg
       }, void 0, false, {
         fileName: _jsxFileName,
