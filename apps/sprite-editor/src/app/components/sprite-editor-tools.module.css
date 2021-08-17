@@ -1,0 +1,15 @@
+.spriteEditorTools {
+  display: flex;
+  justify-content: space-around;
+}
+
+.toolButton {
+  background-color: transparent;
+  border: none;
+}
+
+.toolButtonImg {
+  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
+  width: 22px;
+  height: 22px;
+}

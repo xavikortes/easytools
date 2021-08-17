@@ -1,0 +1,15 @@
+.canvas {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  background-color: var(--canvas-background); 
+  border: var(--canvas-border);
+  box-shadow: var(--canvas-shadow);
+}
+
+.pixel {
+  position: relative;
+  box-sizing: border-box;
+  height: 0;
+  border: var(--canvas-item-border);
+}
