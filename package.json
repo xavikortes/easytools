@@ -25,7 +25,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "predeploy": "nx build",
+    "predeploy": "nx build --prod --baseHref=/easytools/",
     "deploy": "gh-pages -d dist/apps/sprite-editor"
   },
   "private": false,
