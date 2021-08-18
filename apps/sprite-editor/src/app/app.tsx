@@ -1,96 +1,53 @@
 import { useState } from 'react'
 import styles from './app.module.css';
 
-import { Block, Sheet, ColorPalette, SpriteEditorMode } from './types'
-import { SHEET_WIDTH, SHEET_HEIGHT, BLOCK_SIZE } from './config'
+import { Sprite, SpriteSheet, ColorPalette } from './types'
+import { AppScreen, SpriteEditorMode } from './enums'
+import { SPRITESHEET_WIDTH, SPRITESHEET_HEIGHT, SPRITE_SIZE } from './config'
 import { paletteList } from './data';
 
 import Menu from './components/menu'
+import PaletteEditor from './components/palette-editor'
 import Canvas from './components/canvas'
 import SpriteEditorTools from './components/sprite-editor-tools'
 import Palette from './components/palette'
 
 
-// TODO
-// Edicion de Colores
-// Herramientas de sheet
-// Ver rendimiento de sheet (cargar pngs en lugar de pixels?)
-// Separar comps (lo mas eficaz posible)
-// Spritesheet solo debe ser un canvas, que se pinta de otra manera
-// Cursores en general pixelados + colorpicker en palette?
-// Type Sheet -> SpriteSheet
-// SpriteEditorMode -> AppMode?
-// Problema pantallas pequeñas (una de las mias) y muy grandes (4k)
-// PaletteEditor radio button pixelado
-
-// paletas, herramientas y comportamientos  (https://apps.lospec.com/pixel-editor)
-
-
-type PaletteEditorProps = {
-  isPaletteActive: (palette: ColorPalette) => boolean,
-  onChangePalette: (palette: ColorPalette) => void
-}
-
-const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps) => {
-  return (
-    <div className={ styles.paletteEditor }>
-      <ul className={ styles.paletteList }>
-        {
-          Object.values(paletteList).map((palette, idx) =>
-            <li
-              key={ idx }
-              className={ styles.paletteListItem }>
-                <input
-                  type="radio"
-                  className={ styles.paletteListItemRadio }
-                  name="fav_language"
-                  value={ palette.name }
-                  checked={ isPaletteActive(palette) }
-                  onClick={ () => onChangePalette(palette) }
-                  onChange={ () => { /* Error fix */} }
-                />
-                <Palette
-                  palette={ palette }
-                />
-            </li>
-          )
-        }
-      </ul>
-    </div>
-  )
-}
-
-
 type SpriteEditorProps = {
   palette: ColorPalette,
-  sheet: Sheet,
-  setSheet: (sheet: Sheet) => void,
-  selectedBlock: number
+  spritesheet: SpriteSheet,
+  setSpritesheet: (spritesheet: SpriteSheet) => void,
+  selectedSprite: number
 }
 
-const SpriteEditor = ({ palette, sheet, setSheet, selectedBlock }: SpriteEditorProps) => {
+const SpriteEditor = ({ palette, spritesheet, setSpritesheet, selectedSprite }: SpriteEditorProps) => {
+  const [mode, setMode] = useState(SpriteEditorMode.Paint)
   const [selectedColor, setSelectedColor] = useState(palette.colors[0])
 
-  const setBlock = (block: Block) => {
-    setSheet([
-      ...sheet.slice(0, selectedBlock),
-      block,
-      ...sheet.slice(selectedBlock + 1)
+  const setSprite = (sprite: Sprite) => {
+    setSpritesheet([
+      ...spritesheet.slice(0, selectedSprite),
+      sprite,
+      ...spritesheet.slice(selectedSprite + 1)
     ])
   }
 
   return (
     <div className={ styles.spriteEditor }>
-      <span className={ styles.blockTitle }>
-        { `#${(selectedBlock + 1).toString().padStart(3, '0')}` }
+      <span className={ styles.spriteTitle }>
+        { `#${(selectedSprite + 1).toString().padStart(3, '0')}` }
       </span>
       <Canvas
-        block={ sheet[selectedBlock] }
-        setBlock={ setBlock }
+        sprite={ spritesheet[selectedSprite] }
+        setSprite={ setSprite }
         selectedColor={ selectedColor }
       />
       <SpriteEditorTools
-        block={ sheet[selectedBlock] }
+        isModeActive={ toolMode => toolMode === mode }
+        onModeClicked={ toolMode => setMode(toolMode) }
+        spriteNumber={ selectedSprite }
+        sprite={ spritesheet[selectedSprite] }
+        setSprite={ setSprite }
       />
       <Palette
         palette={ palette }
@@ -101,34 +58,34 @@ const SpriteEditor = ({ palette, sheet, setSheet, selectedBlock }: SpriteEditorP
   )
 }
 
-type SpriteSheetProps = {
-  sheet: Sheet,
-  selectedBlock: number,
-  setSelectedBlock: (block: number) => void
+type SpriteSheetTmpProps = {
+  spritesheet: SpriteSheet,
+  selectedSprite: number,
+  setSelectedSprite: (sprite: number) => void
 }
 
-const SpriteSheet = ({ sheet, selectedBlock, setSelectedBlock }: SpriteSheetProps) => {
+const SpriteSheetTmp = ({ spritesheet, selectedSprite, setSelectedSprite }: SpriteSheetTmpProps) => {
   return (
     <ul className={ styles.spritesheet }>
       {
-        sheet.map((block, idx) =>
+        spritesheet.map((sprite, idx) =>
           <ul
             key={ idx }
-            className={ `${styles.block} ${selectedBlock === idx ? styles.selected: ''}` }
-            onClick={ () => setSelectedBlock(idx) }
+            className={ `${styles.sprite} ${selectedSprite === idx ? styles.selected: ''}` }
+            onClick={ () => setSelectedSprite(idx) }
             style={{
-              width: `calc(100% / ${SHEET_WIDTH})`,
-              paddingBottom: `calc(100% / ${SHEET_WIDTH})`
+              width: `calc(100% / ${SPRITESHEET_WIDTH})`,
+              paddingBottom: `calc(100% / ${SPRITESHEET_WIDTH})`
             }}
           >
             {
-              block.map((pixel, pixelIdx) =>
+              sprite.map((pixel, pixelIdx) =>
                 <li
                   key={ pixelIdx }
                   className={ styles.pixel }
                   style={{
-                    width: `calc(100% / ${BLOCK_SIZE})`,
-                    paddingBottom: `calc(100% / ${BLOCK_SIZE})`,
+                    width: `calc(100% / ${SPRITE_SIZE})`,
+                    paddingBottom: `calc(100% / ${SPRITE_SIZE})`,
                     backgroundColor: pixel ? `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3]})` : 'transparent'
                   }}
                 />
@@ -142,85 +99,73 @@ const SpriteSheet = ({ sheet, selectedBlock, setSelectedBlock }: SpriteSheetProp
 }
 
 type SpriteSheetEditorProps = {
-  sheet: Sheet,
-  selectedBlock: number,
-  setSelectedBlock: (block: number) => void
+  spritesheet: SpriteSheet,
+  selectedSprite: number,
+  setSelectedSprite: (sprite: number) => void
 }
 
-const SpriteSheetEditor = ({ sheet, selectedBlock, setSelectedBlock }: SpriteSheetEditorProps) => {
+const SpriteSheetEditor = ({ spritesheet, selectedSprite, setSelectedSprite }: SpriteSheetEditorProps) => {
   return (
     <div className={ styles.spriteSheetEditor }>
-      <SpriteSheet
-        sheet={ sheet }
-        selectedBlock={ selectedBlock }
-        setSelectedBlock={ setSelectedBlock }
+      <SpriteSheetTmp
+        spritesheet={ spritesheet }
+        selectedSprite={ selectedSprite }
+        setSelectedSprite={ setSelectedSprite }
       />
     </div>
   )
 }
 
-type ContainerProps = {
-  children: any | any[]
-}
-
-const Container = ({ children }: ContainerProps) => {
-  return (
-    <div className={ styles.container }>
-      { children }
-    </div>
-  )
-}
-
-const createSheet = () => {
-  return new Array(SHEET_WIDTH * SHEET_HEIGHT)
+const createSpritesheet = () => {
+  return new Array(SPRITESHEET_WIDTH * SPRITESHEET_HEIGHT)
     .fill(null)
     .map(() =>
-      new Array(BLOCK_SIZE * BLOCK_SIZE)
+      new Array(SPRITE_SIZE * SPRITE_SIZE)
       .fill(null)
     )
 }
 
 export function App() {
-  const [sheet, setSheet] = useState(createSheet)
-  const [selectedBlock, setSelectedBlock] = useState(0)
-  const [mode, setMode] = useState('sprite' as SpriteEditorMode)
+  const [spritesheet, setSpritesheet] = useState(createSpritesheet)
+  const [selectedSprite, setSelectedSprite] = useState(0)
+  const [screen, setScreen] = useState(AppScreen.Sprite)
   const [currentPalette, setCurrentPalette] = useState(Object.values(paletteList)[0])
 
   return (
-    <Container>
+    <div className={ styles.container }>
       <div className={ styles.wrapper }>
         <Menu
-          isModeActive={ menuMode => menuMode === mode }
-          onModeClicked={ menuMode => setMode(menuMode) }
+          isScreenActive={ tag => tag === screen }
+          onScreenTagClicked={ tag => setScreen(tag) }
         />
         <div className={ styles.app }>
           {
-            mode === 'palette' &&
+            screen === AppScreen.Palette &&
             <PaletteEditor
               isPaletteActive={ palette => Object.values(palette).toString() === Object.values(currentPalette).toString() }
               onChangePalette={ palette => setCurrentPalette(palette) }
             />
           }
           {
-            mode === 'sprite' &&
+            screen === AppScreen.Sprite &&
             <SpriteEditor
               palette={ currentPalette }
-              sheet={ sheet }
-              setSheet={ setSheet }
-              selectedBlock={ selectedBlock }
+              spritesheet={ spritesheet }
+              setSpritesheet={ setSpritesheet }
+              selectedSprite={ selectedSprite }
             />
           }
           {
-            mode === 'spritesheet' &&
+            screen === AppScreen.Spritesheet &&
             <SpriteSheetEditor
-              sheet={ sheet }
-              selectedBlock={ selectedBlock }
-              setSelectedBlock={ setSelectedBlock }
+            spritesheet={ spritesheet }
+              selectedSprite={ selectedSprite }
+              setSelectedSprite={ setSelectedSprite }
             />
           }
         </div>
       </div>
-    </Container>
+    </div>
   );
 }
 

@@ -1,56 +1,38 @@
 import styles from './menu.module.css'
 
-import { SpriteEditorMode } from '../types'
+import { AppScreen } from '../enums'
+import { menuScreenTags } from '../data'
 
-// TODO
-// Cambiar caterpie por 4 pokemones para representar sheet
 
 type MenuProps = {
-  isModeActive: (mode: SpriteEditorMode) => boolean,
-  onModeClicked: (mode: SpriteEditorMode) => void
+  isScreenActive: (screen: AppScreen) => boolean,
+  onScreenTagClicked: (screen: AppScreen) => void
 }
 
-const Menu = ({ isModeActive, onModeClicked }: MenuProps) => {
+const Menu = ({ isScreenActive, onScreenTagClicked }: MenuProps) => {
   return (
     <div className={ styles.menu }>
       <span>
         SPRITE EDITOR
       </span>
 
-      <div className={ styles.spriteEditorModes }>
-        <button
-          className={
-            `${styles.modeTag} \
-              ${isModeActive('palette') ? styles.active: ''}
-            `
-          }
-          onClick={ () => onModeClicked('palette') }
-        >
-          <span>&nbsp;</span>
-          <img src='assets/palette.png' className={ styles.toolbuttonImg }/>
-        </button>
-        <button
-          className={
-            `${styles.modeTag} \
-              ${isModeActive('sprite') ? styles.active: ''}
-            `
-          }
-          onClick={ () => onModeClicked('sprite') }
-        >
-          <span>&nbsp;</span>
-          <img src='assets/pikachu.png' className={ styles.toolbuttonImg }/>
-        </button>
-        <button
-          className={
-            `${styles.modeTag} \
-              ${isModeActive('spritesheet') ? styles.active: ''}
-            `
-          }
-          // onClick={ () => onModeClicked('spritesheet') }
-        >
-          <span>&nbsp;</span>
-          <img src='assets/caterpie.png' className={ styles.toolbuttonImg }/>
-        </button>
+      <div className={ styles.spriteEditorScreenTags }>
+        {
+          menuScreenTags.map(screenTag =>
+            <button
+              key={ screenTag.screen }
+              className={
+                `${ styles.screenTag } \
+                  ${ isScreenActive(screenTag.screen) ? styles.active : '' }
+                `
+              }
+              onClick={ () => onScreenTagClicked(screenTag.screen) }
+            >
+              <span>&nbsp;</span>
+              <img src={ screenTag.sprite } className={ styles.toolbuttonImg }/>
+            </button>
+          )
+        }
       </div>
     </div>
   )

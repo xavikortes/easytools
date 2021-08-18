@@ -7,13 +7,13 @@
   background-color: var(--menu-background);
 }
 
-.spriteEditorModes {
+.spriteEditorScreenTags {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
 }
 
-.modeTag {
+.screenTag {
   width: 45px;
   height: 70px;
   background-color: var(--menu-tags-background);
@@ -28,7 +28,6 @@
   align-items: center;
 }
 
-/* TODO - Duplicated */
 .toolbuttonImg {
   filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
   width: 22px;

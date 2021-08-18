@@ -1,6 +1,7 @@
 .spriteEditorTools {
   display: flex;
   justify-content: space-around;
+  min-height: 100px;
 }
 
 .toolButton {
@@ -12,4 +13,8 @@
   filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
   width: 22px;
   height: 22px;
+}
+
+.activeButton {
+  filter: drop-shadow(0.1em 0.25em 0.1em var(--menu-tags-active));
 }

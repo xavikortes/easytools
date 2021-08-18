@@ -1,3 +1,20 @@
+import { AppScreen } from "./enums"
+
+export const menuScreenTags = [
+  {
+    screen: AppScreen.Palette,
+    sprite: 'assets/palette.png'
+  },
+  {
+    screen: AppScreen.Sprite,
+    sprite: 'assets/pikachu.png'
+  },
+  {
+    screen: AppScreen.Spritesheet,
+    sprite: 'assets/caterpie.png'
+  }
+]
+
 export const paletteList = {
   'Sweetie': {
     name: 'Sweetie',

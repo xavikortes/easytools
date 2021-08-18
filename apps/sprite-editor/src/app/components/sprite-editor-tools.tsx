@@ -1,103 +1,84 @@
 import styles from './sprite-editor-tools.module.css';
 
-import { Block } from '../types'
-import { BLOCK_SIZE } from '../config'
+import { Sprite } from '../types'
+import { SPRITE_SIZE } from '../config'
 
-// TODO
-// Quitar pokemones chulos
-// downloadPNG a una libreria de imagenes BlockToPng/PngToBlock
-// Mejorar iconos?
-// Herramienta seleccionada
-// Herramienta lapiz / borrador
-// Herramienta color picker
-// Alguna herramienta mas (eliminar all, rellenar, espejar v/h)
-// Subir png
-// Mas iconos
+import { spriteToPng } from '../lib/image'
+import { downloadFile } from '../lib/file';
+import { SpriteEditorMode } from '../enums';
 
-const downloadPNG = (block: Block) => {
-  const canvas = document.createElement("canvas")
-  canvas.width = BLOCK_SIZE
-  canvas.height = BLOCK_SIZE
 
-  const context = canvas.getContext("2d")
-  const imageData = context!.createImageData(BLOCK_SIZE, BLOCK_SIZE)
-  const data = imageData.data
-
-  block.forEach((item, idx) => {
-    data[idx * 4 + 0] = item?.[0]
-    data[idx * 4 + 1] = item?.[1]
-    data[idx * 4 + 2] = item?.[2]
-    data[idx * 4 + 3] = item?.[3] * 255
-    data[idx * 4 + 4] = item?.[0]
-  })
-
-  context!.putImageData(imageData, 0, 0)
-
-  canvas.toBlob(blob => {
-    var url = (URL || webkitURL).createObjectURL(blob)
-    const a = document.createElement('a')
-    a.style.display = 'none'
-    a.href = url
-    a.download = 'sprite.png'
-    document.body.appendChild(a)
-    a.click()
-  });
-
+const downloadPNG = (spriteNumber: number, sprite: Sprite) => {
+  spriteToPng(sprite, SPRITE_SIZE, SPRITE_SIZE)
+    .toBlob(blob =>
+      downloadFile(
+        `#${(spriteNumber + 1).toString().padStart(3, '0')}.png`,
+        blob!
+      )
+    )
   return true
 }
 
 type SpriteEditorToolsProps = {
-  block: Block
+  isModeActive: (mode: SpriteEditorMode) => boolean,
+  onModeClicked: (mode: SpriteEditorMode) => void,
+  spriteNumber: number,
+  sprite: Sprite,
+  setSprite: (sprite: Sprite) => void
 }
 
-const SpriteEditorTools = ({ block }: SpriteEditorToolsProps) => {
+const SpriteEditorTools = ({ isModeActive, onModeClicked, spriteNumber, sprite, setSprite }: SpriteEditorToolsProps) => {
+  const deleteSprite = () => {
+    setSprite(sprite.map(_pixel => null))
+  }
+
+  const getToolButtonProps = (mode?: SpriteEditorMode) => ({
+    className: `${styles.toolButton} \
+       ${ mode && isModeActive(mode) ? styles.activeButton : '' }`,
+    onClick: () => mode && onModeClicked(mode)
+  })
+
   return (
     <div className={ styles.spriteEditorTools }>
       <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('pencil') }
+        { ...getToolButtonProps(SpriteEditorMode.Paint) }
       >
         <img src='assets/pencil.png' className={ styles.toolButtonImg }/>
       </button>
       <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('picker') }
+        { ...getToolButtonProps(SpriteEditorMode.Erase) }
+      >
+        <img src='assets/erase.png' className={ styles.toolButtonImg }/>
+      </button>
+      <button
+        { ...getToolButtonProps(SpriteEditorMode.Pick) }
       >
         <img src='assets/picker.png' className={ styles.toolButtonImg }/>
       </button>
       <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('trash') }
+        { ...getToolButtonProps(SpriteEditorMode.Fill) }
+      >
+        <img src='assets/filler.png' className={ styles.toolButtonImg }/>
+      </button>
+      <button
+        { ...getToolButtonProps() }
+        onClick={ () => deleteSprite() }
       >
         <img src='assets/trash.png' className={ styles.toolButtonImg }/>
       </button>
       <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('pikachu') }
+        { ...getToolButtonProps() }
       >
         <img src='assets/pikachu.png' className={ styles.toolButtonImg }/>
       </button>
       <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('seta') }
-      >
-        <img src='assets/seta.png' className={ styles.toolButtonImg }/>
-      </button>
-      <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('caterpie') }
+        { ...getToolButtonProps() }
       >
         <img src='assets/caterpie.png' className={ styles.toolButtonImg }/>
       </button>
       <button
-        className={ styles.toolButton }
-        onClick={ () => console.log('ash') }
-      >
-        <img src='assets/ash.png' className={ styles.toolButtonImg }/>
-      </button>
-      <button
-        className={ styles.toolButton }
-        onClick={ () => downloadPNG(block) }
+        { ...getToolButtonProps() }
+        onClick={ () => downloadPNG(spriteNumber, sprite) }
       >
         <img src='assets/download.png' className={ styles.toolButtonImg }/>
       </button>
