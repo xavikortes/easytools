@@ -12,4 +12,5 @@
   box-sizing: border-box;
   height: 0;
   border: var(--canvas-item-border);
+  cursor: pointer;
 }

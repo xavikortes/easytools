@@ -1,11 +1,11 @@
+@import url('https://fonts.cdnfonts.com/css/pf-tempesta-seven');
+
 html, body, div, span, a, h1, h2, h3, h4, h5, h6, p,
 blockquote, img, ol, ul, li, input, label, select,
 table, tbody, tfoot, thead, tr, th, td, footer, header,
 menu, nav, section, video {
   margin: 0; padding: 0; font-size: 100%; list-style: none; border: 0;
 }
-
-@import url('https://fonts.cdnfonts.com/css/pf-tempesta-seven');
 
 :root {
   --menu-background: #deded6;
@@ -17,6 +17,10 @@ menu, nav, section, video {
   --canvas-shadow: 0px 0.25em 0.25em 0px #1a1c2c;
   --canvas-item-border: 1px solid #333;
   --palette-item-border: 2px solid #1a1c2c;
+}
+
+button {
+  cursor: pointer;
 }
 
 .container {
@@ -66,6 +70,7 @@ menu, nav, section, video {
 }
 
 .paletteListItemRadio {
+  cursor: pointer;
   margin-right: 5%;
 }
 

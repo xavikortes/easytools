@@ -19,8 +19,9 @@ const Palette = ({ palette, isColorActive, onColorClicked }: PaletteProps) => {
           <li
             key={ idx }
             className={
-              `${styles.paletteColor} \
-                ${isColorActive && isColorActive(color) ? styles.active: ''}
+              `${ styles.paletteColor } \
+                ${ isColorActive && isColorActive(color) ? styles.active: '' } \
+                ${ onColorClicked && styles.clickableColor }
               `
             }
             onClick={ () => onColorClicked && onColorClicked(color) }
