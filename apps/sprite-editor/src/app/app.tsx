@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './app.module.css';
 
 import { Block, Sheet, ColorPalette, SpriteEditorMode } from './types'
-import { SHEET_WIDTH, SHEET_HEIGHT, BLOCK_SIZE, INITIAL_COLOR } from './config'
+import { SHEET_WIDTH, SHEET_HEIGHT, BLOCK_SIZE } from './config'
 import { paletteList } from './data';
 
 import Menu from './components/menu'
@@ -17,9 +17,11 @@ import Palette from './components/palette'
 // Ver rendimiento de sheet (cargar pngs en lugar de pixels?)
 // Separar comps (lo mas eficaz posible)
 // Spritesheet solo debe ser un canvas, que se pinta de otra manera
-// Cursores en general pixelados + pointer + colorpicker en palette?
+// Cursores en general pixelados + colorpicker en palette?
 // Type Sheet -> SpriteSheet
 // SpriteEditorMode -> AppMode?
+// Problema pantallas pequeñas (una de las mias) y muy grandes (4k)
+// PaletteEditor radio button pixelado
 
 // paletas, herramientas y comportamientos  (https://apps.lospec.com/pixel-editor)
 
@@ -67,7 +69,7 @@ type SpriteEditorProps = {
 }
 
 const SpriteEditor = ({ palette, sheet, setSheet, selectedBlock }: SpriteEditorProps) => {
-  const [selectedColor, setSelectedColor] = useState(INITIAL_COLOR)
+  const [selectedColor, setSelectedColor] = useState(palette.colors[0])
 
   const setBlock = (block: Block) => {
     setSheet([
