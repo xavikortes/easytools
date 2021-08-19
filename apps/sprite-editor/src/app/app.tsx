@@ -19,18 +19,11 @@ type SpriteEditorProps = {
   setSprite: (sprite: Sprite) => void
 }
 
-type canvasHandleClickProps = {
-  event: React.MouseEvent<HTMLElement>,
-  idx: number
-}
-
 const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
   const [mode, setMode] = useState(SpriteEditorMode.Paint)
   const [selectedColor, setSelectedColor] = useState(palette.colors[0])
   
-  const setPixel = (event: React.MouseEvent<HTMLElement>, pixel: number, color: Pixel) => {
-    event.preventDefault()
-
+  const setPixel = (pixel: number, color: Pixel) => {
     setSprite({
       ...sprite,
       pixels: [
@@ -43,14 +36,15 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
 
   const canvasHandleClick = {
     [SpriteEditorMode.Paint.toString()]:
-      ({event, idx}: canvasHandleClickProps) => setPixel(event, idx, selectedColor),
+      (idx: number) => setPixel(idx, selectedColor),
     [SpriteEditorMode.Erase.toString()]:
-      ({event, idx}: canvasHandleClickProps) => setPixel(event, idx, null),
+      (idx: number) => setPixel(idx, null),
     [SpriteEditorMode.Pick.toString()]:
-      ({idx}: canvasHandleClickProps) => {
+      (idx: number) => {
         sprite.pixels[idx] && setSelectedColor(sprite.pixels[idx]!)
         sprite.pixels[idx] && setMode(SpriteEditorMode.Paint)
       },
+    [SpriteEditorMode.Fill.toString()]: () => null
   }
 
   return (
@@ -60,7 +54,7 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
       </span>
       <Canvas
         sprite={ sprite }
-        handleClick={ (event, idx) => canvasHandleClick[mode]({ event, idx }) }
+        handleClick={ idx => canvasHandleClick[mode](idx) }
       />
       <SpriteEditorTools
         isModeActive={ toolMode => toolMode === mode }
