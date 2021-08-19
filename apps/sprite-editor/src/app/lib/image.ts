@@ -9,7 +9,7 @@ export const spriteToPng = (sprite: Sprite, width: number, height: number) => {
   const imageData = context!.createImageData(width, height)
   const data = imageData.data
 
-  sprite.forEach((item, idx) => {
+  sprite.pixels.forEach((item, idx) => {
     data[idx * 4 + 0] = item?.[0] ?? 0
     data[idx * 4 + 1] = item?.[1] ?? 0
     data[idx * 4 + 2] = item?.[2] ?? 0

@@ -8,11 +8,11 @@ import { downloadFile } from '../lib/file';
 import { SpriteEditorMode } from '../enums';
 
 
-const downloadPNG = (spriteNumber: number, sprite: Sprite) => {
+const downloadPNG = (sprite: Sprite) => {
   spriteToPng(sprite, SPRITE_SIZE, SPRITE_SIZE)
     .toBlob(blob =>
       downloadFile(
-        `#${(spriteNumber + 1).toString().padStart(3, '0')}.png`,
+        `#${(sprite.number + 1).toString().padStart(3, '0')}.png`,
         blob!
       )
     )
@@ -22,14 +22,16 @@ const downloadPNG = (spriteNumber: number, sprite: Sprite) => {
 type SpriteEditorToolsProps = {
   isModeActive: (mode: SpriteEditorMode) => boolean,
   onModeClicked: (mode: SpriteEditorMode) => void,
-  spriteNumber: number,
   sprite: Sprite,
   setSprite: (sprite: Sprite) => void
 }
 
-const SpriteEditorTools = ({ isModeActive, onModeClicked, spriteNumber, sprite, setSprite }: SpriteEditorToolsProps) => {
+const SpriteEditorTools = ({ isModeActive, onModeClicked, sprite, setSprite }: SpriteEditorToolsProps) => {
   const deleteSprite = () => {
-    setSprite(sprite.map(_pixel => null))
+    setSprite({
+      ...sprite,
+      pixels: sprite.pixels.map(_pixel => null)
+    })
   }
 
   const getToolButtonProps = (mode?: SpriteEditorMode) => ({
@@ -78,7 +80,7 @@ const SpriteEditorTools = ({ isModeActive, onModeClicked, spriteNumber, sprite, 
       </button>
       <button
         { ...getToolButtonProps() }
-        onClick={ () => downloadPNG(spriteNumber, sprite) }
+        onClick={ () => downloadPNG(sprite) }
       >
         <img src='assets/download.png' className={ styles.toolButtonImg }/>
       </button>

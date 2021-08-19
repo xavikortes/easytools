@@ -1,9 +1,14 @@
-// Primary types
 export type Color = number[]
-export type Sprite = (Color | null)[]
-export type SpriteSheet = Sprite[]
+export type Pixel = Color | null
 
 export type ColorPalette = {
   name: string,
   colors: Color[]
 }
+
+export type Sprite = {
+  number: number,
+  pixels: Pixel[]
+}
+
+export type SpriteSheet = Sprite[]

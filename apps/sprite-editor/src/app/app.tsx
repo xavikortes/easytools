@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './app.module.css';
 
-import { Sprite, SpriteSheet, ColorPalette } from './types'
+import { Sprite, SpriteSheet, ColorPalette, Pixel } from './types'
 import { AppScreen, SpriteEditorMode } from './enums'
 import { SPRITESHEET_WIDTH, SPRITESHEET_HEIGHT, SPRITE_SIZE } from './config'
 import { paletteList } from './data';
@@ -15,38 +15,57 @@ import Palette from './components/palette'
 
 type SpriteEditorProps = {
   palette: ColorPalette,
-  spritesheet: SpriteSheet,
-  setSpritesheet: (spritesheet: SpriteSheet) => void,
-  selectedSprite: number
+  sprite: Sprite,
+  setSprite: (sprite: Sprite) => void
 }
 
-const SpriteEditor = ({ palette, spritesheet, setSpritesheet, selectedSprite }: SpriteEditorProps) => {
+type canvasHandleClickProps = {
+  event: React.MouseEvent<HTMLElement>,
+  idx: number
+}
+
+const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
   const [mode, setMode] = useState(SpriteEditorMode.Paint)
   const [selectedColor, setSelectedColor] = useState(palette.colors[0])
+  
+  const setPixel = (event: React.MouseEvent<HTMLElement>, pixel: number, color: Pixel) => {
+    event.preventDefault()
 
-  const setSprite = (sprite: Sprite) => {
-    setSpritesheet([
-      ...spritesheet.slice(0, selectedSprite),
-      sprite,
-      ...spritesheet.slice(selectedSprite + 1)
-    ])
+    setSprite({
+      ...sprite,
+      pixels: [
+        ...sprite.pixels.slice(0, pixel),
+        color ?? null,
+        ...sprite.pixels.slice(pixel + 1)
+      ]
+    })
+  }
+
+  const canvasHandleClick = {
+    [SpriteEditorMode.Paint.toString()]:
+      ({event, idx}: canvasHandleClickProps) => setPixel(event, idx, selectedColor),
+    [SpriteEditorMode.Erase.toString()]:
+      ({event, idx}: canvasHandleClickProps) => setPixel(event, idx, null),
+    [SpriteEditorMode.Pick.toString()]:
+      ({idx}: canvasHandleClickProps) => {
+        sprite.pixels[idx] && setSelectedColor(sprite.pixels[idx]!)
+        sprite.pixels[idx] && setMode(SpriteEditorMode.Paint)
+      },
   }
 
   return (
     <div className={ styles.spriteEditor }>
       <span className={ styles.spriteTitle }>
-        { `#${(selectedSprite + 1).toString().padStart(3, '0')}` }
+        { `#${(sprite.number + 1).toString().padStart(3, '0')}` }
       </span>
       <Canvas
-        sprite={ spritesheet[selectedSprite] }
-        setSprite={ setSprite }
-        selectedColor={ selectedColor }
+        sprite={ sprite }
+        handleClick={ (event, idx) => canvasHandleClick[mode]({ event, idx }) }
       />
       <SpriteEditorTools
         isModeActive={ toolMode => toolMode === mode }
         onModeClicked={ toolMode => setMode(toolMode) }
-        spriteNumber={ selectedSprite }
-        sprite={ spritesheet[selectedSprite] }
+        sprite={ sprite }
         setSprite={ setSprite }
       />
       <Palette
@@ -79,7 +98,7 @@ const SpriteSheetTmp = ({ spritesheet, selectedSprite, setSelectedSprite }: Spri
             }}
           >
             {
-              sprite.map((pixel, pixelIdx) =>
+              sprite.pixels.map((pixel, pixelIdx) =>
                 <li
                   key={ pixelIdx }
                   className={ styles.pixel }
@@ -119,9 +138,12 @@ const SpriteSheetEditor = ({ spritesheet, selectedSprite, setSelectedSprite }: S
 const createSpritesheet = () => {
   return new Array(SPRITESHEET_WIDTH * SPRITESHEET_HEIGHT)
     .fill(null)
-    .map(() =>
-      new Array(SPRITE_SIZE * SPRITE_SIZE)
-      .fill(null)
+    .map((_item, idx) =>
+      ({
+        number: idx,
+        pixels: new Array(SPRITE_SIZE * SPRITE_SIZE)
+        .fill(null)
+      })
     )
 }
 
@@ -130,6 +152,14 @@ export function App() {
   const [selectedSprite, setSelectedSprite] = useState(0)
   const [screen, setScreen] = useState(AppScreen.Sprite)
   const [currentPalette, setCurrentPalette] = useState(Object.values(paletteList)[0])
+
+  const setSprite = (sprite: Sprite) => {
+    setSpritesheet([
+      ...spritesheet.slice(0, selectedSprite),
+      sprite,
+      ...spritesheet.slice(selectedSprite + 1)
+    ])
+  }
 
   return (
     <div className={ styles.container }>
@@ -150,15 +180,14 @@ export function App() {
             screen === AppScreen.Sprite &&
             <SpriteEditor
               palette={ currentPalette }
-              spritesheet={ spritesheet }
-              setSpritesheet={ setSpritesheet }
-              selectedSprite={ selectedSprite }
+              sprite={ spritesheet[selectedSprite] }
+              setSprite={ setSprite }
             />
           }
           {
             screen === AppScreen.Spritesheet &&
             <SpriteSheetEditor
-            spritesheet={ spritesheet }
+              spritesheet={ spritesheet }
               selectedSprite={ selectedSprite }
               setSelectedSprite={ setSelectedSprite }
             />
