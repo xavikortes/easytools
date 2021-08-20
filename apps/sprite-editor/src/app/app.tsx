@@ -13,6 +13,19 @@ import SpriteEditorTools from './components/sprite-editor-tools'
 import Palette from './components/palette'
 
 
+const findNeighbours = (idx: number) => {
+  const neighbours = []
+
+  const row = Math.floor(idx / SPRITE_SIZE)
+
+  row > 0 && neighbours.push(idx - SPRITE_SIZE)
+  Math.floor((idx - 1) / SPRITE_SIZE) === row && neighbours.push(idx - 1)
+  Math.floor((idx + 1) / SPRITE_SIZE) === row && neighbours.push(idx + 1)
+  row < SPRITE_SIZE - 1 && neighbours.push(idx + SPRITE_SIZE)
+
+  return neighbours
+}
+
 type SpriteEditorProps = {
   palette: ColorPalette,
   sprite: Sprite,
@@ -34,6 +47,29 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
     })
   }
 
+  const fill = (idx: number, localSprite: Sprite) => {
+    if (sprite.pixels[idx] === selectedColor) {
+      return localSprite
+    }
+
+    let newSprite = {
+      ...localSprite,
+      pixels: [
+        ...localSprite.pixels.slice(0, idx),
+        selectedColor ?? null,
+        ...localSprite.pixels.slice(idx + 1)
+      ]
+    }
+  
+    findNeighbours(idx)
+      .filter(neighbour => sprite.pixels[idx] === newSprite.pixels[neighbour])
+      .forEach(neighbour => {
+        newSprite = fill(neighbour, newSprite)
+      })
+
+    return newSprite
+  }
+
   const canvasHandleClick = {
     [SpriteEditorMode.Paint.toString()]:
       (idx: number) => setPixel(idx, selectedColor),
@@ -44,7 +80,16 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
         sprite.pixels[idx] && setSelectedColor(sprite.pixels[idx]!)
         sprite.pixels[idx] && setMode(SpriteEditorMode.Paint)
       },
-    [SpriteEditorMode.Fill.toString()]: () => null
+    [SpriteEditorMode.Fill.toString()]:
+      (idx: number) => {
+        const newSprite = fill(idx, sprite)
+        setSprite(newSprite)
+      }
+  }
+
+  const paintCanvasItem = (idx: number) => {
+    const item = sprite.pixels[idx]
+    return item && !!item.length ? `rgba(${item[0]}, ${item[1]}, ${item[2]}, ${item[3]})` : 'transparent'
   }
 
   return (
@@ -53,8 +98,11 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
         { `#${(sprite.number + 1).toString().padStart(3, '0')}` }
       </span>
       <Canvas
-        sprite={ sprite }
+        width={ SPRITE_SIZE }
+        height={ SPRITE_SIZE }
         handleClick={ idx => canvasHandleClick[mode](idx) }
+        paintItem={ idx => paintCanvasItem(idx) }
+        isDragActive={ () => [SpriteEditorMode.Paint, SpriteEditorMode.Erase].includes(mode) }
       />
       <SpriteEditorTools
         isModeActive={ toolMode => toolMode === mode }

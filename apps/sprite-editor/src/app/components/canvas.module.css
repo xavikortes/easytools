@@ -5,6 +5,7 @@
   background-color: var(--canvas-background); 
   border: var(--canvas-border);
   box-shadow: var(--canvas-shadow);
+  touch-action: none;
 }
 
 .pixel {
@@ -13,4 +14,5 @@
   height: 0;
   border: var(--canvas-item-border);
   cursor: pointer;
+  touch-action: none;
 }

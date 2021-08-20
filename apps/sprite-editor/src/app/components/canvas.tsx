@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import styles from './canvas.module.css';
 
-import { Sprite } from '../types'
-import { SPRITE_SIZE } from '../config'
-
 
 type CanvasProps = {
-  sprite: Sprite,
-  handleClick: (idx: number) => void
+  width: number,
+  height: number,
+  handleClick: (idx: number) => void,
+  paintItem: (idx: number) => string,
+  isDragActive: () => boolean,
 }
 
 type DummyEvent = {
   preventDefault: () => void
 }
 
-const Canvas = ({ sprite, handleClick }: CanvasProps) => {
+const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasProps) => {
   const [toolActivated, setToolActivated] = useState(false)
 
-  const handleMouseTouchEvents = (event: DummyEvent, value: boolean, idx?: number) => {
+  const handleMouseEvents = (event: DummyEvent, value: boolean, idx?: number) => {
     event.preventDefault()
 
-    setToolActivated(value)
+    isDragActive() && setToolActivated(value)
     value && handleClick(idx!)
   }
 
@@ -39,10 +39,10 @@ const Canvas = ({ sprite, handleClick }: CanvasProps) => {
   return (
     <ul
       className={ styles.canvas }
-      onMouseLeave={ event => handleMouseTouchEvents(event, false) }
+      onMouseLeave={ event => handleMouseEvents(event, false) }
       >
       {
-        sprite.pixels.map((pixel, idx) =>
+        new Array(width * height).fill(null).map((_item, idx) =>
           <li
             key={ idx }
             data-id={ idx }
@@ -50,13 +50,13 @@ const Canvas = ({ sprite, handleClick }: CanvasProps) => {
             onTouchStart={ event => onTouchEvent(event) }
             onTouchMove={ event => onTouchEvent(event) }
             onTouchEnd={ event => onTouchEvent(event) }
-            onMouseDown={ event => handleMouseTouchEvents(event, true, idx) }
-            onMouseUp={ event => handleMouseTouchEvents(event, false) }
+            onMouseDown={ event => handleMouseEvents(event, true, idx) }
+            onMouseUp={ event => handleMouseEvents(event, false) }
             onMouseOver={ () => !!toolActivated && handleClick(idx) }
             style={{
-              width: `calc(100% / ${SPRITE_SIZE})`,
-              paddingBottom: `calc(100% / ${SPRITE_SIZE})`,
-              backgroundColor: pixel && !!pixel.length ? `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3]})` : 'transparent'
+              width: `calc(100% / ${width})`,
+              paddingBottom: `calc(100% / ${height})`,
+              backgroundColor: paintItem && paintItem(idx)
             }}
           />
         )
