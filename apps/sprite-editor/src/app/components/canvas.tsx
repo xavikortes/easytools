@@ -21,7 +21,7 @@ const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasP
     event.preventDefault()
 
     isDragActive() && setToolActivated(value)
-    value && handleClick(idx!)
+    value && handleClick && handleClick(idx!)
   }
 
   const onTouchEvent = (event: React.TouchEvent) => {
@@ -32,7 +32,7 @@ const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasP
       let element = document.elementFromPoint(touch.clientX, touch.clientY)! as HTMLElement
       let id = parseInt(element.dataset.id!)
 
-      handleClick(id)
+      handleClick && handleClick(id)
     }
   }
 
@@ -40,7 +40,7 @@ const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasP
     <ul
       className={ styles.canvas }
       onMouseLeave={ event => handleMouseEvents(event, false) }
-      >
+    >
       {
         new Array(width * height).fill(null).map((_item, idx) =>
           <li
@@ -52,7 +52,7 @@ const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasP
             onTouchEnd={ event => onTouchEvent(event) }
             onMouseDown={ event => handleMouseEvents(event, true, idx) }
             onMouseUp={ event => handleMouseEvents(event, false) }
-            onMouseOver={ () => !!toolActivated && handleClick(idx) }
+            onMouseOver={ () => !!toolActivated && handleClick && handleClick(idx) }
             style={{
               width: `calc(100% / ${width})`,
               paddingBottom: `calc(100% / ${height})`,
