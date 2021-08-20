@@ -120,16 +120,16 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
 }
 
 type SpriteSheetTmpProps = {
-  spritesheet: SpriteSheet,
+  spriteSheet: SpriteSheet,
   selectedSprite: number,
   setSelectedSprite: (sprite: number) => void
 }
 
-const SpriteSheetTmp = ({ spritesheet, selectedSprite, setSelectedSprite }: SpriteSheetTmpProps) => {
+const SpriteSheetTmp = ({ spriteSheet, selectedSprite, setSelectedSprite }: SpriteSheetTmpProps) => {
   return (
-    <ul className={ styles.spritesheet }>
+    <ul className={ styles.spriteSheet }>
       {
-        spritesheet.map((sprite, idx) =>
+        spriteSheet.map((sprite, idx) =>
           <ul
             key={ idx }
             className={ `${styles.sprite} ${selectedSprite === idx ? styles.selected: ''}` }
@@ -160,16 +160,16 @@ const SpriteSheetTmp = ({ spritesheet, selectedSprite, setSelectedSprite }: Spri
 }
 
 type SpriteSheetEditorProps = {
-  spritesheet: SpriteSheet,
+  spriteSheet: SpriteSheet,
   selectedSprite: number,
   setSelectedSprite: (sprite: number) => void
 }
 
-const SpriteSheetEditor = ({ spritesheet, selectedSprite, setSelectedSprite }: SpriteSheetEditorProps) => {
+const SpriteSheetEditor = ({ spriteSheet, selectedSprite, setSelectedSprite }: SpriteSheetEditorProps) => {
   return (
     <div className={ styles.spriteSheetEditor }>
       <SpriteSheetTmp
-        spritesheet={ spritesheet }
+        spriteSheet={ spriteSheet }
         selectedSprite={ selectedSprite }
         setSelectedSprite={ setSelectedSprite }
       />
@@ -190,16 +190,16 @@ const createSpritesheet = () => {
 }
 
 export function App() {
-  const [spritesheet, setSpritesheet] = useState(createSpritesheet)
+  const [spriteSheet, setSpritesheet] = useState(createSpritesheet)
   const [selectedSprite, setSelectedSprite] = useState(0)
   const [screen, setScreen] = useState(AppScreen.Sprite)
   const [currentPalette, setCurrentPalette] = useState(Object.values(paletteList)[0])
 
   const setSprite = (sprite: Sprite) => {
     setSpritesheet([
-      ...spritesheet.slice(0, selectedSprite),
+      ...spriteSheet.slice(0, selectedSprite),
       sprite,
-      ...spritesheet.slice(selectedSprite + 1)
+      ...spriteSheet.slice(selectedSprite + 1)
     ])
   }
 
@@ -222,14 +222,14 @@ export function App() {
             screen === AppScreen.Sprite &&
             <SpriteEditor
               palette={ currentPalette }
-              sprite={ spritesheet[selectedSprite] }
+              sprite={ spriteSheet[selectedSprite] }
               setSprite={ setSprite }
             />
           }
           {
             screen === AppScreen.Spritesheet &&
             <SpriteSheetEditor
-              spritesheet={ spritesheet }
+              spriteSheet={ spriteSheet }
               selectedSprite={ selectedSprite }
               setSelectedSprite={ setSelectedSprite }
             />

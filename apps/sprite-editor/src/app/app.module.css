@@ -86,7 +86,7 @@ button {
   justify-content: center;
 }
 
-.spritesheet {
+.spriteSheet {
   display: flex;
   flex-wrap: wrap;
   background-color: var(--canvas-background);
