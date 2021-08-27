@@ -1,11 +1,11 @@
 import styles from './sprite-editor-tools.module.css';
 
-import { Sprite } from '../types'
-import { SPRITE_SIZE } from '../config'
+import { Sprite } from '../consts/types'
+import { SpriteEditorMode } from '../consts/enums';
+import { SPRITE_SIZE } from '../consts/config'
 
 import { spriteToPng } from '../lib/image'
 import { downloadFile } from '../lib/file';
-import { SpriteEditorMode } from '../enums';
 
 
 const downloadPNG = (sprite: Sprite) => {

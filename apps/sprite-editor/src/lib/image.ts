@@ -1,4 +1,4 @@
-import { Sprite } from '../types'
+import { Sprite } from '../consts/types'
 
 export const spriteToPng = (sprite: Sprite, width: number, height: number) => {
   const canvas = document.createElement("canvas")

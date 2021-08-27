@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import styles from './app.module.css';
 
-import { Sprite, SpriteSheet, ColorPalette, Pixel } from './types'
-import { AppScreen, SpriteEditorMode } from './enums'
-import { SPRITESHEET_WIDTH, SPRITESHEET_HEIGHT, SPRITE_SIZE } from './config'
-import { paletteList } from './data';
+import { Sprite, SpriteSheet, ColorPalette, Pixel } from '../consts/types'
+import { AppScreen, SpriteEditorMode } from '../consts/enums'
+import { SPRITESHEET_WIDTH, SPRITESHEET_HEIGHT, SPRITE_SIZE } from '../consts/config'
+import { paletteList } from '../consts/data';
 
-import Menu from './components/menu'
-import PaletteEditor from './components/palette-editor'
-import Canvas from './components/canvas'
-import SpriteEditorTools from './components/sprite-editor-tools'
-import Palette from './components/palette'
+import Menu from '../components/menu'
+import PaletteEditor from '../components/palette-editor'
+import Canvas from '../components/canvas'
+import SpriteEditorTools from '../components/sprite-editor-tools'
+import Palette from '../components/palette'
 
 
 const findNeighbours = (idx: number) => {
