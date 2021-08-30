@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import styles from './app.module.css';
+import styles from './app.module.css'
 
 import { Sprite, SpriteSheet, ColorPalette, Pixel } from '../consts/types'
-import { AppScreen, SpriteEditorMode } from '../consts/enums'
-import { SPRITESHEET_WIDTH, SPRITESHEET_HEIGHT, SPRITE_SIZE } from '../consts/config'
-import { paletteList } from '../consts/data';
+import { AppScreen, SpriteEditorMode, Numbers } from '../consts/enums'
+import { initialPaletteList } from '../consts/data'
 
 import Menu from '../components/menu'
 import PaletteEditor from '../components/palette-editor'
@@ -16,12 +15,12 @@ import Palette from '../components/palette'
 const findNeighbours = (idx: number) => {
   const neighbours = []
 
-  const row = Math.floor(idx / SPRITE_SIZE)
+  const row = Math.floor(idx / Numbers.SpriteSize)
 
-  row > 0 && neighbours.push(idx - SPRITE_SIZE)
-  Math.floor((idx - 1) / SPRITE_SIZE) === row && neighbours.push(idx - 1)
-  Math.floor((idx + 1) / SPRITE_SIZE) === row && neighbours.push(idx + 1)
-  row < SPRITE_SIZE - 1 && neighbours.push(idx + SPRITE_SIZE)
+  row > 0 && neighbours.push(idx - Numbers.SpriteSize)
+  Math.floor((idx - 1) / Numbers.SpriteSize) === row && neighbours.push(idx - 1)
+  Math.floor((idx + 1) / Numbers.SpriteSize) === row && neighbours.push(idx + 1)
+  row < Numbers.SpriteSize - 1 && neighbours.push(idx + Numbers.SpriteSize)
 
   return neighbours
 }
@@ -98,8 +97,8 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
         { `#${(sprite.number + 1).toString().padStart(3, '0')}` }
       </span>
       <Canvas
-        width={ SPRITE_SIZE }
-        height={ SPRITE_SIZE }
+        width={ Numbers.SpriteSize }
+        height={ Numbers.SpriteSize }
         handleClick={ idx => canvasHandleClick[mode](idx) }
         paintItem={ idx => paintCanvasItem(idx) }
         isDragActive={ () => [SpriteEditorMode.Paint, SpriteEditorMode.Erase].includes(mode) }
@@ -135,8 +134,8 @@ const SpriteSheetTmp = ({ spriteSheet, selectedSprite, setSelectedSprite }: Spri
             className={ `${styles.sprite} ${selectedSprite === idx ? styles.selected: ''}` }
             onClick={ () => setSelectedSprite(idx) }
             style={{
-              width: `calc(100% / ${SPRITESHEET_WIDTH})`,
-              paddingBottom: `calc(100% / ${SPRITESHEET_WIDTH})`
+              width: `calc(100% / ${Numbers.SpriteSheetWidth})`,
+              paddingBottom: `calc(100% / ${Numbers.SpriteSheetWidth})`
             }}
           >
             {
@@ -145,8 +144,8 @@ const SpriteSheetTmp = ({ spriteSheet, selectedSprite, setSelectedSprite }: Spri
                   key={ pixelIdx }
                   className={ styles.pixel }
                   style={{
-                    width: `calc(100% / ${SPRITE_SIZE})`,
-                    paddingBottom: `calc(100% / ${SPRITE_SIZE})`,
+                    width: `calc(100% / ${Numbers.SpriteSize})`,
+                    paddingBottom: `calc(100% / ${Numbers.SpriteSize})`,
                     backgroundColor: pixel ? `rgba(${pixel[0]}, ${pixel[1]}, ${pixel[2]}, ${pixel[3]})` : 'transparent'
                   }}
                 />
@@ -178,12 +177,12 @@ const SpriteSheetEditor = ({ spriteSheet, selectedSprite, setSelectedSprite }: S
 }
 
 const createSpritesheet = () => {
-  return new Array(SPRITESHEET_WIDTH * SPRITESHEET_HEIGHT)
+  return new Array(Numbers.SpriteSheetWidth * Numbers.SpriteSheetHeight)
     .fill(null)
     .map((_item, idx) =>
       ({
         number: idx,
-        pixels: new Array(SPRITE_SIZE * SPRITE_SIZE)
+        pixels: new Array(Numbers.SpriteSize * Numbers.SpriteSize)
         .fill(null)
       })
     )
@@ -193,7 +192,7 @@ export function App() {
   const [spriteSheet, setSpritesheet] = useState(createSpritesheet)
   const [selectedSprite, setSelectedSprite] = useState(0)
   const [screen, setScreen] = useState(AppScreen.Sprite)
-  const [currentPalette, setCurrentPalette] = useState(Object.values(paletteList)[0])
+  const [currentPalette, setCurrentPalette] = useState(Object.values(initialPaletteList)[0])
 
   const setSprite = (sprite: Sprite) => {
     setSpritesheet([
@@ -216,7 +215,6 @@ export function App() {
             <PaletteEditor
               isPaletteActive={ palette => Object.values(palette).toString() === Object.values(currentPalette).toString() }
               onChangePalette={ palette => setCurrentPalette(palette) }
-              addNewPalette={ () => { /* Error fix */ } }
             />
           }
           {
@@ -238,7 +236,7 @@ export function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

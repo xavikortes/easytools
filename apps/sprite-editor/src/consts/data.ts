@@ -15,7 +15,7 @@ export const menuScreenTags = [
   }
 ]
 
-export const paletteList = {
+export const initialPaletteList = {
   'Sweetie': {
     name: 'Sweetie',
     colors: [

@@ -7,23 +7,17 @@
 }
 
 .paletteListItem {
+  margin: 0% 0% 10%;
+}
+
+.paletteListItemContent {
   display: flex;
   align-items: center;
-  margin: 0% 0% 10%;
 }
 
 .paletteListItemRadio {
   cursor: pointer;
   margin-right: 5%;
-}
-
-.button {
-  font-family: inherit;
-  font-weight: bold;
-  color: #deded6;
-  border-radius: 5%;
-  border: 1px solid #deded6;
-  background-color: transparent;
 }
 
 .newPaletteButton {

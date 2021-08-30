@@ -1,0 +1,8 @@
+.button {
+  font-family: inherit;
+  font-weight: bold;
+  color: #deded6;
+  border-radius: 5%;
+  border: 1px solid #deded6;
+  background-color: transparent;
+}

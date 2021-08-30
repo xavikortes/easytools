@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import styles from './canvas.module.css';
+import { useState } from 'react'
+import styles from './canvas.module.css'
 
 
 type CanvasProps = {
@@ -58,7 +58,7 @@ const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasP
             style={{
               width: `calc(100% / ${width})`,
               paddingBottom: `calc(100% / ${height})`,
-              backgroundColor: paintItem && paintItem(idx)
+              background: paintItem && paintItem(idx)
             }}
           />
         )

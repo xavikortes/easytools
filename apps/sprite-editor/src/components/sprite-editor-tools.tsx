@@ -1,15 +1,14 @@
-import styles from './sprite-editor-tools.module.css';
+import styles from './sprite-editor-tools.module.css'
 
 import { Sprite } from '../consts/types'
-import { SpriteEditorMode } from '../consts/enums';
-import { SPRITE_SIZE } from '../consts/config'
+import { SpriteEditorMode, Numbers } from '../consts/enums'
 
 import { spriteToPng } from '../lib/image'
-import { downloadFile } from '../lib/file';
+import { downloadFile } from '../lib/file'
 
 
 const downloadPNG = (sprite: Sprite) => {
-  spriteToPng(sprite, SPRITE_SIZE, SPRITE_SIZE)
+  spriteToPng(sprite, Numbers.SpriteSize, Numbers.SpriteSize)
     .toBlob(blob =>
       downloadFile(
         `#${(sprite.number + 1).toString().padStart(3, '0')}.png`,

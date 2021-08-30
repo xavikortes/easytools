@@ -1,4 +1,4 @@
-import styles from './palette.module.css';
+import styles from './palette.module.css'
 
 import { ColorPalette, Color } from '../consts/types'
 
@@ -6,13 +6,24 @@ import { ColorPalette, Color } from '../consts/types'
 type PaletteProps = {
   palette: ColorPalette,
   isColorActive?: (color: Color) => boolean,
-  onColorClicked?: (color: Color) => void
+  onColorClicked?: (color: Color) => void,
+  onNameChange?: (newName: string) => void
 }
 
-const Palette = ({ palette, isColorActive, onColorClicked }: PaletteProps) => {
+const Palette = ({ palette, isColorActive, onColorClicked, onNameChange }: PaletteProps) => {  
+  const handleNameChange = (event: React.FormEvent<HTMLSpanElement>) => {
+    onNameChange && onNameChange((event.target as HTMLElement).innerHTML)
+  }
+
   return (
     <div className={ styles.paletteWrapper }>
-      <span>{ palette.name }</span>
+      <div
+        contentEditable={ !!onNameChange }
+        onBlur={ (event) => handleNameChange(event) }
+        suppressContentEditableWarning={ true }
+      >
+        { palette.name }
+      </div>
       <ul className={ styles.palette }>
       {
         palette.colors.map((color, idx) =>
