@@ -16,3 +16,17 @@
   cursor: pointer;
   margin-right: 5%;
 }
+
+.button {
+  font-family: inherit;
+  font-weight: bold;
+  color: #deded6;
+  border-radius: 5%;
+  border: 1px solid #deded6;
+  background-color: transparent;
+}
+
+.newPaletteButton {
+  width: 100%;
+  margin-bottom: 5%;
+}

@@ -6,12 +6,31 @@ import { paletteList } from '../consts/data';
 import Palette from './palette'
 
 
-type PaletteEditorProps = {
-  isPaletteActive: (palette: ColorPalette) => boolean,
-  onChangePalette: (palette: ColorPalette) => void
+type ButtonProps = {
+  text: string,
+  className?: string,
+  onClick?: () => void
 }
 
-const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps) => {
+const Button = ({ text, className, onClick }: ButtonProps) => {
+  const classes = `${styles.button} ${className}`
+  return (
+    <button
+      className={ classes }
+      onClick={ () => onClick && onClick() }>
+        {text}
+    </button>
+  )
+}
+
+
+type PaletteEditorProps = {
+  isPaletteActive: (palette: ColorPalette) => boolean,
+  onChangePalette: (palette: ColorPalette) => void,
+  addNewPalette: () => void
+}
+
+const PaletteEditor = ({ isPaletteActive, onChangePalette, addNewPalette }: PaletteEditorProps) => {
   return (
     <div className={ styles.paletteEditor }>
       <ul className={ styles.paletteList }>
@@ -35,6 +54,10 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
             </li>
           )
         }
+        <Button
+          className={ styles.newPaletteButton }
+          text='+ Nueva Paleta'
+          onClick={ () => addNewPalette() } />
       </ul>
     </div>
   )

@@ -216,6 +216,7 @@ export function App() {
             <PaletteEditor
               isPaletteActive={ palette => Object.values(palette).toString() === Object.values(currentPalette).toString() }
               onChangePalette={ palette => setCurrentPalette(palette) }
+              addNewPalette={ () => { /* Error fix */ } }
             />
           }
           {
