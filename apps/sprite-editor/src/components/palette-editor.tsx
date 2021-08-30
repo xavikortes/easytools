@@ -1,7 +1,7 @@
 import styles from './palette-editor.module.css';
 
-import { ColorPalette } from '../types'
-import { paletteList } from '../data';
+import { ColorPalette } from '../consts/types'
+import { paletteList } from '../consts/data';
 
 import Palette from './palette'
 

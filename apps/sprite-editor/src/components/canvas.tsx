@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './canvas.module.css';
 
 
@@ -32,7 +32,9 @@ const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasP
       let element = document.elementFromPoint(touch.clientX, touch.clientY)! as HTMLElement
       let id = parseInt(element.dataset.id!)
 
-      handleClick && handleClick(id)
+      if (id >= 0 && id < (width * height)) {
+        handleClick && handleClick(id)
+      }
     }
   }
 

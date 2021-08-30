@@ -1,7 +1,7 @@
 import styles from './menu.module.css'
 
-import { AppScreen } from '../enums'
-import { menuScreenTags } from '../data'
+import { AppScreen } from '../consts/enums'
+import { menuScreenTags } from '../consts/data'
 
 
 type MenuProps = {
