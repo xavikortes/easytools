@@ -6,6 +6,10 @@ export type ColorPalette = {
   colors: Color[]
 }
 
+export type PaletteList = {
+  [key: string]: ColorPalette
+}
+
 export type Sprite = {
   number: number,
   pixels: Pixel[]

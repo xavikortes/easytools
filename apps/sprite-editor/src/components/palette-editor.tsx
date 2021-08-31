@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './palette-editor.module.css'
 
-import { ColorPalette } from '../consts/types'
+import { ColorPalette, PaletteList } from '../consts/types'
 import { initialPaletteList } from '../consts/data'
 import { DbName, Strings } from '../consts/enums'
 
@@ -18,12 +18,12 @@ type PaletteEditorProps = {
 }
 
 const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps) => {
-  const [paletteList, setPaletteList] = useState(readDb(DbName.PaletteList) ?? initialPaletteList)
+  const [paletteList, setPaletteList] = useState((readDb(DbName.PaletteList) ?? initialPaletteList) as PaletteList)
 
   const addNewPalette = () => {
-    const newPaletteList = { 
+    const newPaletteList: PaletteList = { 
       ...paletteList,
-      [Strings.NewPaletteName]: { name: Strings.NewPaletteName, colors: Object.values(paletteList).pop().colors }
+      [Strings.NewPaletteName]: { name: Strings.NewPaletteName, colors: Object.values(paletteList).pop()!.colors }
     }
 
     setPaletteList(newPaletteList)
@@ -36,47 +36,9 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
     const palettes = Object.values(paletteList)
     const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
 
-    const newPaletteList = [
+    const newPaletteList: PaletteList = [
       ...palettes.slice(0, paletteIndex),
       { ...palette, name: newName },
-      ...palettes.slice(paletteIndex + 1)
-    ].reduce((accum, item) => ({ ...accum, [item.name]: item }), {})
-
-    setPaletteList(newPaletteList)
-    writeDb(DbName.PaletteList, newPaletteList)
-
-    onChangePalette(newPaletteList[newName])
-  }
-
-  const deletePalette = (palette: ColorPalette) => {
-    const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
-    const nextSelected = Object.values(paletteList)[!!paletteIndex ? paletteIndex - 1 : paletteIndex + 1]
-
-    let newPaletteList = {
-      ...Object.values(paletteList)
-        .filter(item => item.name !== palette.name)
-        .reduce((accum, item) => ({ ...accum, [item.name]: item }), {})
-    }
-
-    if (!Object.keys(newPaletteList).length) {
-      return
-    }
-
-    setPaletteList(newPaletteList)
-    writeDb(DbName.PaletteList, newPaletteList)
-
-    onChangePalette(nextSelected)
-  }
-
-  const copyPalette = (palette: ColorPalette) => {
-    const newName = `${palette.name} - ${Strings.CopiedPaletteName}`
-    const palettes = Object.values(paletteList)
-    const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
-
-    const newPaletteList = [
-      ...palettes.slice(0, paletteIndex),
-      palette,
-      { name: newName, colors: [ ...palette.colors ] },
       ...palettes.slice(paletteIndex + 1)
     ].reduce((accum, item) => ({ ...accum, [item.name]: item }), {})
 
@@ -112,8 +74,10 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
                 {
                   isPaletteActive(palette) &&
                   <PaletteEditorTools
-                    onDeletePalette={ () => deletePalette(palette) }
-                    onCopyPalette={ () => copyPalette(palette) } />
+                    palette={ palette }
+                    paletteList={ paletteList }
+                    setPaletteList={ setPaletteList }
+                    onChangePalette={ onChangePalette } />
                 }
             </li>
           )
