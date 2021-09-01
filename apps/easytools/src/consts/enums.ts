@@ -42,7 +42,7 @@ export enum Assets {
 export enum AppScreen {
   Palette = 1,
   Sprite,
-  Spritesheet,
+  SpriteSheet,
 }
 
 export enum SpriteEditorMode {

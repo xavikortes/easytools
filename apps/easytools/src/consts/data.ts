@@ -12,7 +12,7 @@ export const menuScreenTags = [
     title: Strings.Sprite
   },
   {
-    screen: AppScreen.Spritesheet,
+    screen: AppScreen.SpriteSheet,
     sprite: Assets.SpriteSheet,
     title: Strings.SpriteSheet
   }

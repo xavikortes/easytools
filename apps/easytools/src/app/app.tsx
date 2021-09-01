@@ -119,7 +119,7 @@ export function App() {
             />
           }
           {
-            screen === AppScreen.Spritesheet &&
+            screen === AppScreen.SpriteSheet &&
             <SpriteSheetEditor
               spriteSheet={ spriteSheet }
               selectedSprite={ selectedSprite }
