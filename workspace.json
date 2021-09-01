@@ -1,25 +1,25 @@
 {
   "version": 2,
   "projects": {
-    "sprite-editor": {
-      "root": "apps/sprite-editor",
-      "sourceRoot": "apps/sprite-editor/src",
+    "easytools": {
+      "root": "apps/easytools",
+      "sourceRoot": "apps/easytools/src",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/web:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/sprite-editor",
-            "index": "apps/sprite-editor/src/index.html",
-            "main": "apps/sprite-editor/src/main.tsx",
-            "polyfills": "apps/sprite-editor/src/polyfills.ts",
-            "tsConfig": "apps/sprite-editor/tsconfig.app.json",
+            "outputPath": "dist/apps/easytools",
+            "index": "apps/easytools/src/index.html",
+            "main": "apps/easytools/src/main.tsx",
+            "polyfills": "apps/easytools/src/polyfills.ts",
+            "tsConfig": "apps/easytools/tsconfig.app.json",
             "assets": [
-              "apps/sprite-editor/src/favicon.ico",
-              "apps/sprite-editor/src/assets"
+              "apps/easytools/src/favicon.ico",
+              "apps/easytools/src/assets"
             ],
-            "styles": ["apps/sprite-editor/src/styles.css"],
+            "styles": ["apps/easytools/src/styles.css"],
             "scripts": [],
             "webpackConfig": "@nrwl/react/plugins/webpack"
           },
@@ -27,8 +27,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "apps/sprite-editor/src/environments/environment.ts",
-                  "with": "apps/sprite-editor/src/environments/environment.prod.ts"
+                  "replace": "apps/easytools/src/environments/environment.ts",
+                  "with": "apps/easytools/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -51,12 +51,12 @@
         "serve": {
           "executor": "@nrwl/web:dev-server",
           "options": {
-            "buildTarget": "sprite-editor:build",
+            "buildTarget": "easytools:build",
             "hmr": true
           },
           "configurations": {
             "production": {
-              "buildTarget": "sprite-editor:build:production",
+              "buildTarget": "easytools:build:production",
               "hmr": false
             }
           }
@@ -64,41 +64,41 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/sprite-editor/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["apps/easytools/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/sprite-editor"],
+          "outputs": ["coverage/apps/easytools"],
           "options": {
-            "jestConfig": "apps/sprite-editor/jest.config.js",
+            "jestConfig": "apps/easytools/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
-    "sprite-editor-e2e": {
-      "root": "apps/sprite-editor-e2e",
-      "sourceRoot": "apps/sprite-editor-e2e/src",
+    "easytools-e2e": {
+      "root": "apps/easytools-e2e",
+      "sourceRoot": "apps/easytools-e2e/src",
       "projectType": "application",
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/sprite-editor-e2e/cypress.json",
-            "tsConfig": "apps/sprite-editor-e2e/tsconfig.e2e.json",
-            "devServerTarget": "sprite-editor:serve"
+            "cypressConfig": "apps/easytools-e2e/cypress.json",
+            "tsConfig": "apps/easytools-e2e/tsconfig.e2e.json",
+            "devServerTarget": "easytools:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "sprite-editor:serve:production"
+              "devServerTarget": "easytools:serve:production"
             }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/sprite-editor-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/easytools-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "sprite-editor"
+  "defaultProject": "easytools"
 }

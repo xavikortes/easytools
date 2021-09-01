@@ -27,12 +27,12 @@
     ]
   },
   "projects": {
-    "sprite-editor": {
+    "easytools": {
       "tags": []
     },
-    "sprite-editor-e2e": {
+    "easytools-e2e": {
       "tags": [],
-      "implicitDependencies": ["sprite-editor"]
+      "implicitDependencies": ["easytools"]
     }
   }
 }

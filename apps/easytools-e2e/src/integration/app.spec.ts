@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('sprite-editor', () => {
+describe('easytools', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {
@@ -8,6 +8,6 @@ describe('sprite-editor', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to sprite-editor!');
+    getGreeting().contains('Welcome to easytools!');
   });
 });
