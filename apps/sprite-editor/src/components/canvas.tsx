@@ -15,7 +15,7 @@ type DummyEvent = {
 }
 
 const Canvas = ({ width, height, handleClick, paintItem, isDragActive }: CanvasProps) => {
-  const [toolActivated, setToolActivated] = useState(false)
+  const [toolActivated, setToolActivated] = useState<boolean>(false)
 
   const handleMouseEvents = (event: DummyEvent, value: boolean, idx?: number) => {
     event.preventDefault()

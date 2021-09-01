@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './app.module.css'
 
-import { Sprite, SpriteSheet, ColorPalette, Pixel } from '../consts/types'
+import { Sprite, SpriteSheet, ColorPalette, Pixel, Color } from '../consts/types'
 import { AppScreen, SpriteEditorMode, Numbers } from '../consts/enums'
 import { initialPaletteList } from '../consts/data'
 
@@ -32,8 +32,8 @@ type SpriteEditorProps = {
 }
 
 const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
-  const [mode, setMode] = useState(SpriteEditorMode.Paint)
-  const [selectedColor, setSelectedColor] = useState(palette.colors[0])
+  const [mode, setMode] = useState<SpriteEditorMode>(SpriteEditorMode.Paint)
+  const [selectedColor, setSelectedColor] = useState<Color>(palette.colors[0])
   
   const setPixel = (pixel: number, color: Pixel) => {
     setSprite({
@@ -189,10 +189,10 @@ const createSpritesheet = () => {
 }
 
 export function App() {
-  const [spriteSheet, setSpritesheet] = useState(createSpritesheet)
-  const [selectedSprite, setSelectedSprite] = useState(0)
-  const [screen, setScreen] = useState(AppScreen.Sprite)
-  const [currentPalette, setCurrentPalette] = useState(Object.values(initialPaletteList)[0])
+  const [spriteSheet, setSpritesheet] = useState<SpriteSheet>(createSpritesheet)
+  const [selectedSprite, setSelectedSprite] = useState<number>(0)
+  const [screen, setScreen] = useState<AppScreen>(AppScreen.Sprite)
+  const [currentPalette, setCurrentPalette] = useState<ColorPalette>(Object.values(initialPaletteList)[0])
 
   const setSprite = (sprite: Sprite) => {
     setSpritesheet([
