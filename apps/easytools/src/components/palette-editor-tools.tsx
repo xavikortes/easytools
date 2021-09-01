@@ -6,6 +6,8 @@ import { initialPaletteList } from '../consts/data'
 
 import { writeDb } from '../lib/db'
 
+import ToolButton from './tool-button'
+
 
 type PaletteEditorToolsProps = {
   palette: ColorPalette,
@@ -99,26 +101,17 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
   return (
     <>
       <div className={ styles.paletteEditorTools }>
-        <button
-          className={ styles.toolButton }
+        <ToolButton
           onClick={ () => onDeletePalette() }
-        >
-          <img src='assets/trash.png' className={ styles.toolButtonImg }/>
-        </button>
-        <button
-          className={ styles.toolButton }
+          img='assets/trash.png' />
+        <ToolButton
           onClick={ () => onCopyPalette() }
-        >
-          <img src='assets/copy.png' className={ styles.toolButtonImg }/>
-        </button>
+          img='assets/copy.png' />
         {
           palette.name in initialPaletteList &&
-            <button
-              className={ styles.toolButton }
+            <ToolButton
               onClick={ () => restoreDefaultPalette() }
-            >
-              <img src='assets/restore.png' className={ styles.toolButtonImg }/>
-            </button>
+              img='assets/restore.png' />
         }
       </div>
       {

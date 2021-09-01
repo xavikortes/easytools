@@ -4,18 +4,6 @@
   margin: 10% 0% 0%;
 }
 
-.toolButton {
-  background-color: transparent;
-  border: none;
-  outline: 0;
-}
-
-.toolButtonImg {
-  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
-  width: 22px;
-  height: 22px;
-}
-
 .colorEditors {
   margin-top: 5%;
   color: #deded6;
