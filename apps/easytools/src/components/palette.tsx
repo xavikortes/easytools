@@ -1,6 +1,6 @@
-import styles from './palette.module.css'
-
 import { ColorPalette, Color } from '../consts/types'
+
+import styles from './palette.module.css'
 
 
 type PaletteProps = {

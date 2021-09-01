@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import styles from './app.module.css'
 
 import { Sprite, SpriteSheet, ColorPalette, Pixel, Color } from '../consts/types'
 import { AppScreen, SpriteEditorMode, Numbers } from '../consts/enums'
@@ -10,6 +9,8 @@ import PaletteEditor from '../components/palette-editor'
 import Canvas from '../components/canvas'
 import SpriteEditorTools from '../components/sprite-editor-tools'
 import Palette from '../components/palette'
+
+import styles from './app.module.css'
 
 
 const findNeighbours = (idx: number) => {

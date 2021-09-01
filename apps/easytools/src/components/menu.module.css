@@ -17,22 +17,18 @@
   width: 45px;
   height: 70px;
   background-color: var(--menu-tags-background);
-  color: var(--menu-background);
   margin-left: 1%;
   border-radius: 0 0 20% 20%;
-  border: none;
   z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  outline: 0;
 }
 
-.toolbuttonImg {
-  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
-  width: 22px;
-  height: 22px;
+.screenTag::before {
+  content: '';
+  height: 25%;
 }
 
 .active {

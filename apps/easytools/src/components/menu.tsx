@@ -1,7 +1,9 @@
-import styles from './menu.module.css'
-
 import { AppScreen } from '../consts/enums'
 import { menuScreenTags } from '../consts/data'
+
+import ToolButton from './tool-button'
+
+import styles from './menu.module.css'
 
 
 type MenuProps = {
@@ -19,18 +21,15 @@ const Menu = ({ isScreenActive, onScreenTagClicked }: MenuProps) => {
       <div className={ styles.spriteEditorScreenTags }>
         {
           menuScreenTags.map(screenTag =>
-            <button
+            <ToolButton
               key={ screenTag.screen }
+              img={ screenTag.sprite }
               className={
                 `${ styles.screenTag } \
                   ${ isScreenActive(screenTag.screen) ? styles.active : '' }
                 `
               }
-              onClick={ () => onScreenTagClicked(screenTag.screen) }
-            >
-              <span>&nbsp;</span>
-              <img src={ screenTag.sprite } className={ styles.toolbuttonImg }/>
-            </button>
+              onClick={ () => onScreenTagClicked(screenTag.screen) } />
           )
         }
       </div>

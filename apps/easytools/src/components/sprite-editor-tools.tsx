@@ -1,5 +1,3 @@
-import styles from './sprite-editor-tools.module.css'
-
 import { Sprite } from '../consts/types'
 import { SpriteEditorMode, Numbers } from '../consts/enums'
 
@@ -7,6 +5,8 @@ import { spriteToPng } from '../lib/image'
 import { downloadFile } from '../lib/file'
 
 import ToolButton from './tool-button'
+
+import styles from './sprite-editor-tools.module.css'
 
 
 const downloadPNG = (sprite: Sprite) => {

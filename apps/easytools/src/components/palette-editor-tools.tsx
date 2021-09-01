@@ -1,5 +1,3 @@
-import styles from './palette-editor-tools.module.css'
-
 import { Color, ColorPalette, PaletteList } from '../consts/types'
 import { DbName, Strings } from '../consts/enums'
 import { initialPaletteList } from '../consts/data'
@@ -7,6 +5,8 @@ import { initialPaletteList } from '../consts/data'
 import { writeDb } from '../lib/db'
 
 import ToolButton from './tool-button'
+
+import styles from './palette-editor-tools.module.css'
 
 
 type PaletteEditorToolsProps = {

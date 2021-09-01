@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import styles from './palette-editor.module.css'
 
 import { Color, ColorPalette, PaletteList } from '../consts/types'
 import { initialPaletteList } from '../consts/data'
@@ -10,6 +9,8 @@ import { readDb, writeDb } from '../lib/db'
 import Palette from './palette'
 import Button from './button'
 import PaletteEditorTools from './palette-editor-tools'
+
+import styles from './palette-editor.module.css'
 
 
 const getPaletteList = () => (readDb(DbName.PaletteList) ?? initialPaletteList) as PaletteList

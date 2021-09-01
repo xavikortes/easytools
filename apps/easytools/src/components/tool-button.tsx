@@ -1,6 +1,6 @@
-import styles from './tool-button.module.css'
-
 import Button from './button'
+
+import styles from './tool-button.module.css'
 
 
 type ToolButtonProps = {
