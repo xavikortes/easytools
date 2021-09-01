@@ -1,18 +1,22 @@
 import styles from './palette-editor-tools.module.css'
 
-import { ColorPalette, PaletteList } from '../consts/types'
-import { writeDb } from '../lib/db'
+import { Color, ColorPalette, PaletteList } from '../consts/types'
 import { DbName, Strings } from '../consts/enums'
+import { initialPaletteList } from '../consts/data'
+
+import { writeDb } from '../lib/db'
 
 
 type PaletteEditorToolsProps = {
   palette: ColorPalette,
   paletteList: PaletteList,
   setPaletteList: (paletteList: PaletteList) => void,
+  currentColor?: Color,
+  setCurrentColor: (color: Color) => void,
   onChangePalette: (palette: ColorPalette) => void
 }
 
-const PaletteEditorTools = ({ palette, paletteList, setPaletteList, onChangePalette }: PaletteEditorToolsProps) => {
+const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor, setCurrentColor, onChangePalette }: PaletteEditorToolsProps) => {
   const onDeletePalette = () => {
     const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
     const nextSelected = Object.values(paletteList)[!!paletteIndex ? paletteIndex - 1 : paletteIndex + 1]
@@ -51,6 +55,47 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, onChangePale
     onChangePalette(newPaletteList[newName])
   }
 
+  const restoreDefaultPalette = () => {
+    const newPaletteList: PaletteList = {
+      ...paletteList,
+      [palette.name]: (initialPaletteList as PaletteList)[palette.name]
+    }
+
+    setPaletteList(newPaletteList)
+    writeDb(DbName.PaletteList, newPaletteList)
+
+    onChangePalette(newPaletteList[palette.name])
+  }
+
+  const onColorChanged = (idx: number, value: string) => {
+    const colorIdx = palette.colors.findIndex(color => color === currentColor)
+    const palettes = Object.values(paletteList)
+    const paletteIdx = Object.keys(paletteList).findIndex(key => key === palette.name)
+
+    const newCurrentColor = [
+      ...currentColor!.slice(0, idx),
+      idx ===3 ? parseFloat(value) : parseInt(value),
+      ...currentColor!.slice(idx + 1)
+    ]
+
+    const newPaletteList: PaletteList = [
+      ...palettes.slice(0, paletteIdx),
+      {
+        ...palette,
+        colors: [
+          ...palette.colors.slice(0, colorIdx),
+          newCurrentColor,
+          ...palette.colors.slice(colorIdx + 1)
+        ]
+      },
+      ...palettes.slice(paletteIdx + 1)
+    ].reduce((accum, item) => ({ ...accum, [item.name]: item }), {})
+
+    setPaletteList(newPaletteList)
+    setCurrentColor(newCurrentColor)
+    writeDb(DbName.PaletteList, newPaletteList)
+  }
+
   return (
     <>
       <div className={ styles.paletteEditorTools }>
@@ -66,21 +111,45 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, onChangePale
         >
           <img src='assets/copy.png' className={ styles.toolButtonImg }/>
         </button>
+        {
+          palette.name in initialPaletteList &&
+            <button
+              className={ styles.toolButton }
+              onClick={ () => restoreDefaultPalette() }
+            >
+              <img src='assets/restore.png' className={ styles.toolButtonImg }/>
+            </button>
+        }
       </div>
-      <div className={ styles.colorEditors }>
-        <input type='range'
-          min='0' max='255' step='1'
-          onChange={ event => console.log(event.target.value) } />
-        <input type='range'
-          min='0' max='255' step='1'
-          onChange={ event => console.log(event.target.value) } />
-        <input type='range'
-          min='0' max='255' step='1'
-          onChange={ event => console.log(event.target.value) } />
-        <input type='range'
-          min='0' max='1' step='0.01'
-          onChange={ event => console.log(event.target.value) } />
-      </div>
+      {
+        currentColor &&
+          <div className={ styles.colorEditors }>
+            <span>
+              <input type='range'
+                min='0' max='255' step='1' value={ currentColor[0] }
+                onChange={ event => onColorChanged(0, event.target.value) } />
+              { currentColor[0] }
+            </span>
+            <span>
+              <input type='range'
+                min='0' max='255' step='1' value={ currentColor[1] }
+                onChange={ event => onColorChanged(1, event.target.value) } />
+              { currentColor[1] }
+            </span>
+            <span>
+              <input type='range'
+                min='0' max='255' step='1' value={ currentColor[2] }
+                onChange={ event => onColorChanged(2, event.target.value) } />
+              { currentColor[2] }
+            </span>
+            <span>
+              <input type='range'
+                min='0' max='1' step='0.01' value={ currentColor[3] }
+                onChange={ event => onColorChanged(3, event.target.value) } />
+              { currentColor[3] }
+            </span>
+          </div>
+      }
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './palette-editor.module.css'
 
-import { ColorPalette, PaletteList } from '../consts/types'
+import { Color, ColorPalette, PaletteList } from '../consts/types'
 import { initialPaletteList } from '../consts/data'
 import { DbName, Strings } from '../consts/enums'
 
@@ -12,13 +12,21 @@ import Button from './button'
 import PaletteEditorTools from './palette-editor-tools'
 
 
+const getPaletteList = () => (readDb(DbName.PaletteList) ?? initialPaletteList) as PaletteList
+
 type PaletteEditorProps = {
   isPaletteActive: (palette: ColorPalette) => boolean,
   onChangePalette: (palette: ColorPalette) => void
 }
 
 const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps) => {
-  const [paletteList, setPaletteList] = useState((readDb(DbName.PaletteList) ?? initialPaletteList) as PaletteList)
+  const [paletteList, setPaletteList] = useState<PaletteList>(getPaletteList)
+  const [selectedColor, setSelectedColor] = useState<Color>()
+
+  const changePalette = (palette: ColorPalette) => {
+    setSelectedColor(undefined)
+    onChangePalette(palette)
+  }
 
   const addNewPalette = () => {
     const newPaletteList: PaletteList = { 
@@ -29,7 +37,7 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
     setPaletteList(newPaletteList)
     writeDb(DbName.PaletteList, newPaletteList)
 
-    onChangePalette(newPaletteList[Strings.NewPaletteName])
+    changePalette(newPaletteList[Strings.NewPaletteName])
   }
 
   const editPaletteName = (palette: ColorPalette, newName: string) => {
@@ -45,7 +53,7 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
     setPaletteList(newPaletteList)
     writeDb(DbName.PaletteList, newPaletteList)
 
-    onChangePalette(newPaletteList[newName])
+    changePalette(newPaletteList[newName])
   }
 
   return (
@@ -58,16 +66,18 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
               className={ styles.paletteListItem }>
                 <div className={ styles.paletteListItemContent }>
                   <input
-                    type="radio"
+                    type='radio'
                     className={ styles.paletteListItemRadio }
-                    name="fav_language"
+                    name='activePalette'
                     value={ palette.name }
                     checked={ isPaletteActive(palette) }
-                    onClick={ () => onChangePalette(palette) }
+                    onClick={ () => changePalette(palette) }
                     onChange={ () => { /* Error fix */ } }
                   />
                   <Palette
                     palette={ palette }
+                    isColorActive={ color => color === selectedColor }
+                    onColorClicked={ color => isPaletteActive(palette) && setSelectedColor(color) }
                     onNameChange={ newName => editPaletteName(palette, newName) }
                   />
                 </div>
@@ -77,7 +87,9 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
                     palette={ palette }
                     paletteList={ paletteList }
                     setPaletteList={ setPaletteList }
-                    onChangePalette={ onChangePalette } />
+                    currentColor={ selectedColor }
+                    setCurrentColor={ setSelectedColor }
+                    onChangePalette={ changePalette } />
                 }
             </li>
           )

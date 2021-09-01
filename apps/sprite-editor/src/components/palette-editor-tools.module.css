@@ -7,6 +7,7 @@
 .toolButton {
   background-color: transparent;
   border: none;
+  outline: 0;
 }
 
 .toolButtonImg {
@@ -16,7 +17,18 @@
 }
 
 .colorEditors {
+  margin-top: 5%;
+  color: #deded6;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+.colorEditors span {
+  display: flex;
+  justify-content: space-between;
+}
+
+.colorEditors span input {
+  width: 80%;
 }
