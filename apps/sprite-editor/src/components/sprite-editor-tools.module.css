@@ -7,6 +7,7 @@
 .toolButton {
   background-color: transparent;
   border: none;
+  outline: 0;
 }
 
 .toolButtonImg {
