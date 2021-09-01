@@ -24,6 +24,7 @@ const Menu = ({ isScreenActive, onScreenTagClicked }: MenuProps) => {
             <ToolButton
               key={ screenTag.screen }
               img={ screenTag.sprite }
+              title={ screenTag.title }
               className={
                 `${ styles.screenTag } \
                   ${ isScreenActive(screenTag.screen) ? styles.active : '' }

@@ -1,5 +1,5 @@
 import { Sprite } from '../consts/types'
-import { SpriteEditorMode, Numbers } from '../consts/enums'
+import { SpriteEditorMode, Numbers, Strings, Assets } from '../consts/enums'
 
 import { spriteToPng } from '../lib/image'
 import { downloadFile } from '../lib/file'
@@ -38,38 +38,46 @@ const SpriteEditorTools = ({ isModeActive, onModeClicked, sprite, setSprite }: S
   return (
     <div className={ styles.spriteEditorTools }>
       <ToolButton
-        img='assets/pencil.png'
+        img={ Assets.Paint }
         className={ isModeActive(SpriteEditorMode.Paint) ? styles.activeButton : undefined }
-        onClick={ () => onModeClicked(SpriteEditorMode.Paint) } />
+        onClick={ () => onModeClicked(SpriteEditorMode.Paint) }
+        title={ Strings.PaintMode } />
 
       <ToolButton
-        img='assets/erase.png'
+        img={ Assets.Erase }
         className={ isModeActive(SpriteEditorMode.Erase) ? styles.activeButton : undefined }
-        onClick={ () => onModeClicked(SpriteEditorMode.Erase) } />
+        onClick={ () => onModeClicked(SpriteEditorMode.Erase) }
+        title={ Strings.EraseMode } />
 
       <ToolButton
-        img='assets/picker.png'
+        img={ Assets.Pick }
         className={ isModeActive(SpriteEditorMode.Pick) ? styles.activeButton : undefined }
-        onClick={ () => onModeClicked(SpriteEditorMode.Pick) } />
+        onClick={ () => onModeClicked(SpriteEditorMode.Pick) }
+        title={ Strings.PickMode } />
 
       <ToolButton
-        img='assets/filler.png'
+        img={ Assets.Fill }
         className={ isModeActive(SpriteEditorMode.Fill) ? styles.activeButton : undefined }
-        onClick={ () => onModeClicked(SpriteEditorMode.Fill) } />
+        onClick={ () => onModeClicked(SpriteEditorMode.Fill) }
+        title={ Strings.FillMode } />
 
       <ToolButton
-        img='assets/trash.png'
-        onClick={ () => deleteSprite() } />
+        img={ Assets.Delete }
+        onClick={ () => deleteSprite() }
+        title={ Strings.Delete } />
 
       <ToolButton
-        img='assets/pikachu.png' />
+        img={ Assets.Sprite }
+        title={ Strings.NotImplemented } />
 
       <ToolButton
-        img='assets/caterpie.png' />
+        img={ Assets.SpriteSheet }
+        title={ Strings.NotImplemented } />
 
       <ToolButton
-        img='assets/download.png'
-        onClick={ () => downloadPNG(sprite) } />
+        img={ Assets.Download }
+        onClick={ () => downloadPNG(sprite) }
+        title={ Strings.Download } />
 
     </div>
   )

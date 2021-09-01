@@ -1,17 +1,20 @@
-import { AppScreen } from "./enums"
+import { AppScreen, Assets, Strings } from "./enums"
 
 export const menuScreenTags = [
   {
     screen: AppScreen.Palette,
-    sprite: 'assets/palette.png'
+    sprite: Assets.Palette,
+    title: Strings.Palette
   },
   {
     screen: AppScreen.Sprite,
-    sprite: 'assets/pikachu.png'
+    sprite: Assets.Sprite,
+    title: Strings.Sprite
   },
   {
     screen: AppScreen.Spritesheet,
-    sprite: 'assets/caterpie.png'
+    sprite: Assets.SpriteSheet,
+    title: Strings.SpriteSheet
   }
 ]
 
