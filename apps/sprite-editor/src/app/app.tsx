@@ -91,6 +91,11 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
     return item && !!item.length ? `rgba(${item[0]}, ${item[1]}, ${item[2]}, ${item[3]})` : 'transparent'
   }
 
+  const changeColor = (color: Color) => {
+    mode === SpriteEditorMode.Erase && setMode(SpriteEditorMode.Paint)
+    setSelectedColor(color)
+  }
+
   return (
     <div className={ styles.spriteEditor }>
       <span className={ styles.spriteTitle }>
@@ -112,7 +117,7 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
       <Palette
         palette={ palette }
         isColorActive={ color => color.toString() === selectedColor.toString() }
-        onColorClicked={ color => setSelectedColor(color) }
+        onColorClicked={ color => changeColor(color) }
       />
     </div>
   )
@@ -213,7 +218,7 @@ export function App() {
           {
             screen === AppScreen.Palette &&
             <PaletteEditor
-              isPaletteActive={ palette => Object.values(palette).toString() === Object.values(currentPalette).toString() }
+              isPaletteActive={ palette => palette.name === currentPalette.name }
               onChangePalette={ palette => setCurrentPalette(palette) }
             />
           }
