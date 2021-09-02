@@ -17,7 +17,8 @@
     "paths": {
       "@easytools/components": ["libs/components/src/index.ts"],
       "@easytools/consts": ["libs/consts/src/index.ts"],
-      "@easytools/lib": ["libs/lib/src/index.ts"]
+      "@easytools/lib": ["libs/lib/src/index.ts"],
+      "@easytools/sprite-editor": ["libs/sprite-editor/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

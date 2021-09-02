@@ -3,17 +3,17 @@ import { AppScreen, AssetsImg, Strings } from './enums'
 export const menuScreenTags = [
   {
     screen: AppScreen.Palette,
-    sprite: AssetsImg.Palette,
+    icon: AssetsImg.Palette,
     title: Strings.Palette
   },
   {
     screen: AppScreen.Sprite,
-    sprite: AssetsImg.Sprite,
+    icon: AssetsImg.Sprite,
     title: Strings.Sprite
   },
   {
     screen: AppScreen.SpriteSheet,
-    sprite: AssetsImg.SpriteSheet,
+    icon: AssetsImg.SpriteSheet,
     title: Strings.SpriteSheet
   }
 ]

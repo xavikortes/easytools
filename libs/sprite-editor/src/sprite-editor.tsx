@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 import { Types, Numbers, SpriteEditorMode } from '@easytools/consts'
-
 import { Canvas, Palette } from '@easytools/components'
-import SpriteEditorTools from '../components/sprite-editor-tools'
+
+import SpriteEditorTools from './sprite-editor-tools'
 
 import styles from './sprite-editor.module.css'
 

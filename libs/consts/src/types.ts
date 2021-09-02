@@ -21,6 +21,6 @@ export type SpriteSheet = Sprite[]
 
 export type ScreenTag = {
   screen: AppScreen,
-  sprite: AssetsImg,
+  icon: AssetsImg,
   title: string
 }

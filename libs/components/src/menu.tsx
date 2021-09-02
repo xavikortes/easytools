@@ -18,19 +18,22 @@ const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuPro
         { title }
       </span>
 
-      <div className={ styles.spriteEditorScreenTags }>
+      <div className={ styles.screenTags }>
         {
           screenTags.map(screenTag =>
-            <ToolButton
-              key={ screenTag.screen }
-              img={ screenTag.sprite }
-              title={ screenTag.title }
+            <div
               className={
                 `${ styles.screenTag } \
                   ${ isScreenActive(screenTag.screen) ? styles.active : '' }
                 `
               }
-              onClick={ () => onScreenTagClicked(screenTag.screen) } />
+            >
+              <ToolButton
+                key={ screenTag.screen }
+                img={ screenTag.icon }
+                title={ screenTag.title }
+                onClick={ () => onScreenTagClicked(screenTag.screen) } />
+            </div>
           )
         }
       </div>

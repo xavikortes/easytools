@@ -7,7 +7,7 @@
   background-color: var(--menu-background);
 }
 
-.spriteEditorScreenTags {
+.screenTags {
   flex-grow: 1;
   display: flex;
   justify-content: flex-end;
