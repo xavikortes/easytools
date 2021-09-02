@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { Types, AppScreen, Numbers, Data } from '@easytools/consts'
+import { Menu } from '@easytools/components'
 
-import Menu from '../components/menu'
 import PaletteEditor from '../components/palette-editor'
 import SpriteEditor from '../components/sprite-editor'
 
@@ -97,6 +97,8 @@ export function App() {
     <div className={ styles.container }>
       <div className={ styles.wrapper }>
         <Menu
+          title='SPRITE EDITOR'
+          screenTags={ Data.menuScreenTags }
           isScreenActive={ tag => tag === screen }
           onScreenTagClicked={ tag => setScreen(tag) }
         />

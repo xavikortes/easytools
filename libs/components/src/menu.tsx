@@ -1,24 +1,26 @@
-import { Data, AppScreen } from '@easytools/consts'
+import { Types, AppScreen } from '@easytools/consts'
 import { ToolButton } from '@easytools/components'
 
 import styles from './menu.module.css'
 
 
 type MenuProps = {
+  title: string,
+  screenTags: Types.ScreenTag[],
   isScreenActive: (screen: AppScreen) => boolean,
   onScreenTagClicked: (screen: AppScreen) => void
 }
 
-const Menu = ({ isScreenActive, onScreenTagClicked }: MenuProps) => {
+const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuProps) => {
   return (
     <div className={ styles.menu }>
       <span>
-        SPRITE EDITOR
+        { title }
       </span>
 
       <div className={ styles.spriteEditorScreenTags }>
         {
-          Data.menuScreenTags.map(screenTag =>
+          screenTags.map(screenTag =>
             <ToolButton
               key={ screenTag.screen }
               img={ screenTag.sprite }
