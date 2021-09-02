@@ -1,36 +1,32 @@
 import { useState } from 'react'
 
-import { Color, ColorPalette, PaletteList } from '../consts/types'
-import { initialPaletteList } from '../consts/data'
-import { DbName, Strings } from '../consts/enums'
+import { Types, Data, DbName, Strings } from '@easytools/consts'
+import { readDb, writeDb } from '@easytools/lib'
+import { Palette, Button } from '@easytools/components'
 
-import { readDb, writeDb } from '../lib/db'
-
-import Palette from './palette'
-import Button from './button'
 import PaletteEditorTools from './palette-editor-tools'
 
 import styles from './palette-editor.module.css'
 
 
-const getPaletteList = () => (readDb(DbName.PaletteList) ?? initialPaletteList) as PaletteList
+const getPaletteList = () => (readDb(DbName.PaletteList) ?? Data.initialPaletteList) as Types.PaletteList
 
 type PaletteEditorProps = {
-  isPaletteActive: (palette: ColorPalette) => boolean,
-  onChangePalette: (palette: ColorPalette) => void
+  isPaletteActive: (palette: Types.ColorPalette) => boolean,
+  onChangePalette: (palette: Types.ColorPalette) => void
 }
 
 const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps) => {
-  const [paletteList, setPaletteList] = useState<PaletteList>(getPaletteList)
-  const [selectedColor, setSelectedColor] = useState<Color>()
+  const [paletteList, setPaletteList] = useState<Types.PaletteList>(getPaletteList)
+  const [selectedColor, setSelectedColor] = useState<Types.Color>()
 
-  const changePalette = (palette: ColorPalette) => {
+  const changePalette = (palette: Types.ColorPalette) => {
     setSelectedColor(undefined)
     onChangePalette(palette)
   }
 
   const addNewPalette = () => {
-    const newPaletteList: PaletteList = { 
+    const newPaletteList: Types.PaletteList = { 
       ...paletteList,
       [Strings.NewPaletteName]: { name: Strings.NewPaletteName, colors: Object.values(paletteList).pop()!.colors }
     }
@@ -41,11 +37,11 @@ const PaletteEditor = ({ isPaletteActive, onChangePalette }: PaletteEditorProps)
     changePalette(newPaletteList[Strings.NewPaletteName])
   }
 
-  const editPaletteName = (palette: ColorPalette, newName: string) => {
+  const editPaletteName = (palette: Types.ColorPalette, newName: string) => {
     const palettes = Object.values(paletteList)
     const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
 
-    const newPaletteList: PaletteList = [
+    const newPaletteList: Types.PaletteList = [
       ...palettes.slice(0, paletteIndex),
       { ...palette, name: newName },
       ...palettes.slice(paletteIndex + 1)

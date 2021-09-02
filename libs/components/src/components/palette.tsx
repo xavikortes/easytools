@@ -1,12 +1,12 @@
-import { ColorPalette, Color } from '../consts/types'
+import { Types } from '@easytools/consts'
 
 import styles from './palette.module.css'
 
 
 type PaletteProps = {
-  palette: ColorPalette,
-  isColorActive?: (color: Color) => boolean,
-  onColorClicked?: (color: Color) => void,
+  palette: Types.ColorPalette,
+  isColorActive?: (color: Types.Color) => boolean,
+  onColorClicked?: (color: Types.Color) => void,
   onNameChange?: (newName: string) => void
 }
 

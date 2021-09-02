@@ -1,21 +1,17 @@
-import { Color, ColorPalette, PaletteList } from '../consts/types'
-import { AssetsImg, DbName, Strings } from '../consts/enums'
-import { initialPaletteList } from '../consts/data'
-
-import { writeDb } from '../lib/db'
-
-import ToolButton from './tool-button'
+import { Types, Data, AssetsImg, DbName, Strings } from '@easytools/consts'
+import { writeDb } from '@easytools/lib'
+import { ToolButton } from '@easytools/components'
 
 import styles from './palette-editor-tools.module.css'
 
 
 type PaletteEditorToolsProps = {
-  palette: ColorPalette,
-  paletteList: PaletteList,
-  setPaletteList: (paletteList: PaletteList) => void,
-  currentColor?: Color,
-  setCurrentColor: (color: Color) => void,
-  onChangePalette: (palette: ColorPalette) => void
+  palette: Types.ColorPalette,
+  paletteList: Types.PaletteList,
+  setPaletteList: (paletteList: Types.PaletteList) => void,
+  currentColor?: Types.Color,
+  setCurrentColor: (color: Types.Color) => void,
+  onChangePalette: (palette: Types.ColorPalette) => void
 }
 
 const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor, setCurrentColor, onChangePalette }: PaletteEditorToolsProps) => {
@@ -23,7 +19,7 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
     const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
     const nextSelected = Object.values(paletteList)[!!paletteIndex ? paletteIndex - 1 : paletteIndex + 1]
 
-    let newPaletteList: PaletteList = {
+    let newPaletteList: Types.PaletteList = {
       ...Object.values(paletteList)
         .filter(item => item.name !== palette.name)
         .reduce((accum, item) => ({ ...accum, [item.name]: item }), {})
@@ -44,7 +40,7 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
     const palettes = Object.values(paletteList)
     const paletteIndex = Object.keys(paletteList).findIndex(key => key === palette.name)
 
-    const newPaletteList: PaletteList = [
+    const newPaletteList: Types.PaletteList = [
       ...palettes.slice(0, paletteIndex),
       palette,
       { name: newName, colors: [ ...palette.colors ] },
@@ -58,9 +54,9 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
   }
 
   const restoreDefaultPalette = () => {
-    const newPaletteList: PaletteList = {
+    const newPaletteList: Types.PaletteList = {
       ...paletteList,
-      [palette.name]: (initialPaletteList as PaletteList)[palette.name]
+      [palette.name]: (Data.initialPaletteList as Types.PaletteList)[palette.name]
     }
 
     setPaletteList(newPaletteList)
@@ -80,7 +76,7 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
       ...currentColor!.slice(idx + 1)
     ]
 
-    const newPaletteList: PaletteList = [
+    const newPaletteList: Types.PaletteList = [
       ...palettes.slice(0, paletteIdx),
       {
         ...palette,
@@ -110,7 +106,7 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
           img={ AssetsImg.Copy }
           title={ Strings.Copy } />
         {
-          palette.name in initialPaletteList &&
+          palette.name in Data.initialPaletteList &&
             <ToolButton
               onClick={ () => restoreDefaultPalette() }
               img={ AssetsImg.Restore }

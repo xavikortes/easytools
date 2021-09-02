@@ -1,15 +1,18 @@
-import { Sprite } from '../consts/types'
-import { SpriteEditorMode, Numbers, Strings, AssetsImg } from '../consts/enums'
+import {
+  Types,
+  SpriteEditorMode,
+  Numbers,
+  Strings,
+  AssetsImg
+} from '@easytools/consts'
 
-import { spriteToPng } from '../lib/image'
-import { downloadFile } from '../lib/file'
-
-import ToolButton from './tool-button'
+import { spriteToPng, downloadFile } from '@easytools/lib'
+import { ToolButton } from '@easytools/components'
 
 import styles from './sprite-editor-tools.module.css'
 
 
-const downloadPNG = (sprite: Sprite) => {
+const downloadPNG = (sprite: Types.Sprite) => {
   spriteToPng(sprite, Numbers.SpriteSize, Numbers.SpriteSize)
     .toBlob(blob =>
       downloadFile(
@@ -23,8 +26,8 @@ const downloadPNG = (sprite: Sprite) => {
 type SpriteEditorToolsProps = {
   isModeActive: (mode: SpriteEditorMode) => boolean,
   onModeClicked: (mode: SpriteEditorMode) => void,
-  sprite: Sprite,
-  setSprite: (sprite: Sprite) => void
+  sprite: Types.Sprite,
+  setSprite: (sprite: Types.Sprite) => void
 }
 
 const SpriteEditorTools = ({ isModeActive, onModeClicked, sprite, setSprite }: SpriteEditorToolsProps) => {

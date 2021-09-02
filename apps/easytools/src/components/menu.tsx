@@ -1,7 +1,5 @@
-import { AppScreen } from '../consts/enums'
-import { menuScreenTags } from '../consts/data'
-
-import ToolButton from './tool-button'
+import { Data, AppScreen } from '@easytools/consts'
+import { ToolButton } from '@easytools/components'
 
 import styles from './menu.module.css'
 
@@ -20,7 +18,7 @@ const Menu = ({ isScreenActive, onScreenTagClicked }: MenuProps) => {
 
       <div className={ styles.spriteEditorScreenTags }>
         {
-          menuScreenTags.map(screenTag =>
+          Data.menuScreenTags.map(screenTag =>
             <ToolButton
               key={ screenTag.screen }
               img={ screenTag.sprite }

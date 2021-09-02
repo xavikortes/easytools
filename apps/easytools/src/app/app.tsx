@@ -1,8 +1,6 @@
 import { useState } from 'react'
 
-import { Sprite, SpriteSheet, ColorPalette } from '../consts/types'
-import { AppScreen, Numbers } from '../consts/enums'
-import { initialPaletteList } from '../consts/data'
+import { Types, AppScreen, Numbers, Data } from '@easytools/consts'
 
 import Menu from '../components/menu'
 import PaletteEditor from '../components/palette-editor'
@@ -12,7 +10,7 @@ import styles from './app.module.css'
 
 
 type SpriteSheetTmpProps = {
-  spriteSheet: SpriteSheet,
+  spriteSheet: Types.SpriteSheet,
   selectedSprite: number,
   setSelectedSprite: (sprite: number) => void
 }
@@ -52,7 +50,7 @@ const SpriteSheetTmp = ({ spriteSheet, selectedSprite, setSelectedSprite }: Spri
 }
 
 type SpriteSheetEditorProps = {
-  spriteSheet: SpriteSheet,
+  spriteSheet: Types.SpriteSheet,
   selectedSprite: number,
   setSelectedSprite: (sprite: number) => void
 }
@@ -82,12 +80,12 @@ const createSpritesheet = () => {
 }
 
 export function App() {
-  const [spriteSheet, setSpritesheet] = useState<SpriteSheet>(createSpritesheet)
+  const [spriteSheet, setSpritesheet] = useState<Types.SpriteSheet>(createSpritesheet)
   const [selectedSprite, setSelectedSprite] = useState<number>(0)
   const [screen, setScreen] = useState<AppScreen>(AppScreen.Sprite)
-  const [currentPalette, setCurrentPalette] = useState<ColorPalette>(Object.values(initialPaletteList)[0])
+  const [currentPalette, setCurrentPalette] = useState<Types.ColorPalette>(Object.values(Data.initialPaletteList)[0])
 
-  const setSprite = (sprite: Sprite) => {
+  const setSprite = (sprite: Types.Sprite) => {
     setSpritesheet([
       ...spriteSheet.slice(0, selectedSprite),
       sprite,

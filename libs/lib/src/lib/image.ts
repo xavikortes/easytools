@@ -1,11 +1,11 @@
-import { Sprite } from '../consts/types'
+import { Types } from '@easytools/consts'
 
-export const spriteToPng = (sprite: Sprite, width: number, height: number) => {
-  const canvas = document.createElement("canvas")
+export const spriteToPng = (sprite: Types.Sprite, width: number, height: number) => {
+  const canvas = document.createElement('canvas')
   canvas.width = width
   canvas.height = height
 
-  const context = canvas.getContext("2d")
+  const context = canvas.getContext('2d')
   const imageData = context!.createImageData(width, height)
   const data = imageData.data
 

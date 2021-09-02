@@ -1,6 +1,48 @@
 {
   "version": 2,
   "projects": {
+    "components": {
+      "root": "libs/components",
+      "sourceRoot": "libs/components/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/components/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/components"],
+          "options": {
+            "jestConfig": "libs/components/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "consts": {
+      "root": "libs/consts",
+      "sourceRoot": "libs/consts/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/consts/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/consts"],
+          "options": {
+            "jestConfig": "libs/consts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "easytools": {
       "root": "apps/easytools",
       "sourceRoot": "apps/easytools/src",
@@ -99,6 +141,27 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/easytools-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "lib": {
+      "root": "libs/lib",
+      "sourceRoot": "libs/lib/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/lib/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/lib"],
+          "options": {
+            "jestConfig": "libs/lib/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

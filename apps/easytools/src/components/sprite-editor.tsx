@@ -1,11 +1,9 @@
 import { useState } from 'react'
 
-import { Sprite, ColorPalette, Pixel, Color } from '../consts/types'
-import { SpriteEditorMode, Numbers } from '../consts/enums'
+import { Types, Numbers, SpriteEditorMode } from '@easytools/consts'
 
-import Canvas from '../components/canvas'
+import { Canvas, Palette } from '@easytools/components'
 import SpriteEditorTools from '../components/sprite-editor-tools'
-import Palette from '../components/palette'
 
 import styles from './sprite-editor.module.css'
 
@@ -24,16 +22,16 @@ const findNeighbours = (idx: number) => {
 }
 
 type SpriteEditorProps = {
-  palette: ColorPalette,
-  sprite: Sprite,
-  setSprite: (sprite: Sprite) => void
+  palette: Types.ColorPalette,
+  sprite: Types.Sprite,
+  setSprite: (sprite: Types.Sprite) => void
 }
 
 const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
   const [mode, setMode] = useState<SpriteEditorMode>(SpriteEditorMode.Paint)
-  const [selectedColor, setSelectedColor] = useState<Color>(palette.colors[0])
+  const [selectedColor, setSelectedColor] = useState<Types.Color>(palette.colors[0])
   
-  const setPixel = (pixel: number, color: Pixel) => {
+  const setPixel = (pixel: number, color: Types.Pixel) => {
     setSprite({
       ...sprite,
       pixels: [
@@ -44,7 +42,7 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
     })
   }
 
-  const fill = (idx: number, localSprite: Sprite) => {
+  const fill = (idx: number, localSprite: Types.Sprite) => {
     if (sprite.pixels[idx] === selectedColor) {
       return localSprite
     }
@@ -89,7 +87,7 @@ const SpriteEditor = ({ palette, sprite, setSprite }: SpriteEditorProps) => {
     return item && !!item.length ? `rgba(${item[0]}, ${item[1]}, ${item[2]}, ${item[3]})` : 'transparent'
   }
 
-  const changeColor = (color: Color) => {
+  const changeColor = (color: Types.Color) => {
     mode === SpriteEditorMode.Erase && setMode(SpriteEditorMode.Paint)
     setSelectedColor(color)
   }

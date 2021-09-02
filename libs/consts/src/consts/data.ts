@@ -1,4 +1,4 @@
-import { AppScreen, AssetsImg, Strings } from "./enums"
+import { AppScreen, AssetsImg, Strings } from './enums'
 
 export const menuScreenTags = [
   {

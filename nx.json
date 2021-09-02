@@ -27,12 +27,21 @@
     ]
   },
   "projects": {
+    "components": {
+      "tags": []
+    },
+    "consts": {
+      "tags": []
+    },
     "easytools": {
       "tags": []
     },
     "easytools-e2e": {
       "tags": [],
       "implicitDependencies": ["easytools"]
+    },
+    "lib": {
+      "tags": []
     }
   }
 }
