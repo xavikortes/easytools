@@ -1,5 +1,5 @@
 import { Color, ColorPalette, PaletteList } from '../consts/types'
-import { Assets, DbName, Strings } from '../consts/enums'
+import { AssetsImg, DbName, Strings } from '../consts/enums'
 import { initialPaletteList } from '../consts/data'
 
 import { writeDb } from '../lib/db'
@@ -103,17 +103,17 @@ const PaletteEditorTools = ({ palette, paletteList, setPaletteList, currentColor
       <div className={ styles.paletteEditorTools }>
         <ToolButton
           onClick={ () => onDeletePalette() }
-          img={ Assets.Delete }
+          img={ AssetsImg.Delete }
           title={ Strings.Delete } />
         <ToolButton
           onClick={ () => onCopyPalette() }
-          img={ Assets.Copy }
+          img={ AssetsImg.Copy }
           title={ Strings.Copy } />
         {
           palette.name in initialPaletteList &&
             <ToolButton
               onClick={ () => restoreDefaultPalette() }
-              img={ Assets.Restore }
+              img={ AssetsImg.Restore }
               title={ Strings.Restore } />
         }
       </div>

@@ -24,7 +24,7 @@ export enum Numbers {
   SpriteSize = 16
 }
 
-export enum Assets {
+export enum AssetsImg {
   Paint='assets/pencil.png',
   Erase='assets/erase.png',
   Pick='assets/picker.png',
