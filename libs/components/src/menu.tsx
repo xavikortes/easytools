@@ -6,9 +6,9 @@ import styles from './menu.module.css'
 
 type MenuProps = {
   title: string,
-  screenTags: Types.ScreenTag[],
-  isScreenActive: (screen: AppScreen) => boolean,
-  onScreenTagClicked: (screen: AppScreen) => void
+  screenTags?: Types.ScreenTag[],
+  isScreenActive?: (screen: AppScreen) => boolean,
+  onScreenTagClicked?: (screen: AppScreen) => void
 }
 
 const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuProps) => {
@@ -20,11 +20,11 @@ const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuPro
 
       <div className={ styles.screenTags }>
         {
-          screenTags.map(screenTag =>
+          screenTags?.map(screenTag =>
             <div
               className={
                 `${ styles.screenTag } \
-                  ${ isScreenActive(screenTag.screen) ? styles.active : '' }
+                  ${ isScreenActive && isScreenActive(screenTag.screen) ? styles.active : '' }
                 `
               }
             >
@@ -32,7 +32,7 @@ const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuPro
                 key={ screenTag.screen }
                 img={ screenTag.icon }
                 title={ screenTag.title }
-                onClick={ () => onScreenTagClicked(screenTag.screen) } />
+                onClick={ () => onScreenTagClicked && onScreenTagClicked(screenTag.screen) } />
             </div>
           )
         }
