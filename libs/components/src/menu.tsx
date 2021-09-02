@@ -22,6 +22,7 @@ const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuPro
         {
           screenTags?.map(screenTag =>
             <div
+              key={ screenTag.screen }
               className={
                 `${ styles.screenTag } \
                   ${ isScreenActive && isScreenActive(screenTag.screen) ? styles.active : '' }
@@ -29,7 +30,6 @@ const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuPro
               }
             >
               <ToolButton
-                key={ screenTag.screen }
                 img={ screenTag.icon }
                 title={ screenTag.title }
                 onClick={ () => onScreenTagClicked && onScreenTagClicked(screenTag.screen) } />
