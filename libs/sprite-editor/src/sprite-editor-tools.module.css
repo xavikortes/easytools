@@ -5,5 +5,5 @@
 }
 
 .activeButton {
-  filter: drop-shadow(0.1em 0.25em 0.1em var(--menu-tags-active));
+  filter: var(--contrast-drop-shadow);
 }

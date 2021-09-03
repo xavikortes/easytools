@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-import { Types, AppScreen, Numbers, Data } from '@easytools/consts'
+import { Types, SpriteEditorScreen, Numbers, Data } from '@easytools/consts'
 import { Menu } from '@easytools/components'
 
 import PaletteEditor from './palette-editor'
 import SpriteEditor from './sprite-editor'
 
-import styles from './app.module.css'
+import styles from './sprite-editor-app.module.css'
 
 
 type SpriteSheetTmpProps = {
@@ -82,7 +82,7 @@ const createSpritesheet = () => {
 export function App() {
   const [spriteSheet, setSpritesheet] = useState<Types.SpriteSheet>(createSpritesheet)
   const [selectedSprite, setSelectedSprite] = useState<number>(0)
-  const [screen, setScreen] = useState<AppScreen>(AppScreen.Sprite)
+  const [screen, setScreen] = useState<SpriteEditorScreen>(SpriteEditorScreen.Sprite)
   const [currentPalette, setCurrentPalette] = useState<Types.ColorPalette>(Object.values(Data.initialPaletteList)[0])
 
   const setSprite = (sprite: Types.Sprite) => {
@@ -97,20 +97,20 @@ export function App() {
     <div className={ styles.wrapper }>
       <Menu
         title='SPRITE EDITOR'
-        screenTags={ Data.menuScreenTags }
+        screenTags={ Data.SpriteEditorScreenTags }
         isScreenActive={ tag => tag === screen }
         onScreenTagClicked={ tag => setScreen(tag) }
       />
       <div className={ styles.app }>
         {
-          screen === AppScreen.Palette &&
+          screen === SpriteEditorScreen.Palette &&
           <PaletteEditor
             isPaletteActive={ palette => palette.name === currentPalette.name }
             onChangePalette={ palette => setCurrentPalette(palette) }
           />
         }
         {
-          screen === AppScreen.Sprite &&
+          screen === SpriteEditorScreen.Sprite &&
           <SpriteEditor
             palette={ currentPalette }
             sprite={ spriteSheet[selectedSprite] }
@@ -118,7 +118,7 @@ export function App() {
           />
         }
         {
-          screen === AppScreen.SpriteSheet &&
+          screen === SpriteEditorScreen.SpriteSheet &&
           <SpriteSheetEditor
             spriteSheet={ spriteSheet }
             selectedSprite={ selectedSprite }

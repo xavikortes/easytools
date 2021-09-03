@@ -1,8 +1,8 @@
 import { Menu } from '@easytools/components'
-import { Strings } from '@easytools/consts'
+import { Colors, Strings } from '@easytools/consts'
 import { useState } from 'react'
 
-import styles from './app.module.css'
+import styles from './box-shadow-app.module.css'
 
 
 export function App() {
@@ -12,9 +12,9 @@ export function App() {
   const [blur, setBlur] = useState(15)
   const [opacity, setOpacity] = useState(1)
   const [inset, setInset] = useState(false)
-  const [hexColor, setHexColor] = useState('#000')
+  const [hexColor, setHexColor] = useState(Colors.InitialBoxShadowColor as string)
   const [color, setColor] = useState([0, 0, 0])
-  const [targetColor, setTargetColor] = useState('#a99379')
+  const [targetColor, setTargetColor] = useState(Colors.InitialBoxShadowTargetColor as string)
 
   const setPreColor = (value: string) => {
     setHexColor(value)

@@ -1,3 +1,5 @@
+@import url('http://fonts.cdnfonts.com/css/frnkgothitc-bk-bt');
+
 html, body, div, span, a, h1, h2, h3, h4, h5, h6, p,
 blockquote, img, ol, ul, li, input, label, select,
 table, tbody, tfoot, thead, tr, th, td, footer, header,
@@ -6,15 +8,24 @@ menu, nav, section, video {
 }
 
 :root {
-  --menu-background: #deded6;
-  --menu-tags-background: #333d51;
-  --menu-tags-active: #ed7147;
-  --app-background: #566c86;
-  --canvas-background: #1a1c2c;
-  --canvas-border: 2px solid #deded6;
-  --canvas-shadow: 0px 0.25em 0.25em 0px #1a1c2c;
-  --canvas-item-border: 1px solid #333;
-  --palette-item-border: 2px solid #1a1c2c;
+  --light-color: #deded6;
+  --dark-color: #1a1c2c;
+  --min-dark-color: #333;
+  --contrast-color: #ed7147;
+
+  --background-color: #566c86;
+  --dark-background-color: #304c6d;
+  --alt-background-color: #333d51;
+
+  --light-border: 2px solid var(--light-color);
+  --dark-border: 2px solid var(--dark-color);
+  --min-dark-border: 1px solid var(--min-dark-color);
+
+  --inner-light-shadow: 0px 0px 0px 0.3em white inset;
+  --dark-shadow: 0px 0.25em 0.25em 0px var(--dark-color);
+
+  --dark-drop-shadow: drop-shadow(0.1em 0.25em 0.1em var(--dark-color));
+  --contrast-drop-shadow: drop-shadow(0.1em 0.25em 0.1em var(--contrast-color));
 }
 
 button {
@@ -29,7 +40,10 @@ button {
   bottom: 0;
   display: flex;
   justify-content: center;
-  background-color: #304c6d;
+  background-color: var(--dark-background-color);
+  color: var(--dark-color);
+  font-family: 'FrnkGothITC Bk BT', sans-serif;
+  font-size: 0.9em;
 }
 
 .container > * {

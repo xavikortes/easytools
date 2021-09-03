@@ -5,7 +5,7 @@
 }
 
 .toolButtonImg {
-  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
+  filter: var(--dark-drop-shadow);
   width: 22px;
   height: 22px;
 }

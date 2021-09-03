@@ -1,4 +1,4 @@
-import { AppScreen, AssetsImg } from "./enums"
+import { SpriteEditorScreen, AssetsImg } from "./enums"
 
 export type Color = number[]
 export type Pixel = Color | null
@@ -20,7 +20,7 @@ export type Sprite = {
 export type SpriteSheet = Sprite[]
 
 export type ScreenTag = {
-  screen: AppScreen,
+  screen: SpriteEditorScreen,
   icon: AssetsImg,
   title: string
 }

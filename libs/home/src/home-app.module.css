@@ -1,0 +1,47 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.app {
+  flex-grow: 1;
+  display: flex;
+  align-items: stretch;
+  background-color: var(--background-color);
+  overflow-y: auto;
+}
+
+.appList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  justify-items: flex-start;
+  width: 100%;
+  margin: 5% 2%;
+}
+
+.appItem {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 22%;
+  margin: 1%;
+  align-items: center;
+  text-decoration: none;
+}
+
+.appIcon {
+  width: 50px;
+  height: 50px;
+  filter: var(--dark-drop-shadow);
+}
+
+.appTitle {
+  margin-top: 5%;
+  color: var(--light-color);
+  text-align: center;
+  font-size: 0.75em;
+  font-weight: bold;
+}

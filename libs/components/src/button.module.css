@@ -1,8 +1,8 @@
 .button {
   font-family: inherit;
   font-weight: bold;
-  color: #deded6;
+  color: var(--light-color);
   border-radius: 5%;
-  border: 1px solid #deded6;
+  border: var(--light-border);
   background-color: transparent;
 }

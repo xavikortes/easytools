@@ -1,10 +1,23 @@
 .menu {
+  min-height: 30px;
   max-height: 30px;
   flex-basis: 30px;
   padding: 0px 4%;
   display: flex;
   align-items: center;
-  background-color: var(--menu-background);
+  background-color: var(--light-color);
+  font-weight: bold;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.home {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 .screenTags {
@@ -16,7 +29,7 @@
 .screenTag {
   width: 45px;
   height: 70px;
-  background-color: var(--menu-tags-background);
+  background-color: var(--alt-background-color);
   margin-left: 1%;
   border-radius: 0 0 20% 20%;
   z-index: 10;
@@ -32,5 +45,5 @@
 }
 
 .active {
-  background-color: var(--menu-tags-active);
+  background-color: var(--contrast-color);
 }

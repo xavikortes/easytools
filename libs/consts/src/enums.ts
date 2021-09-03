@@ -28,6 +28,8 @@ export enum Strings {
 
   Yes='Yes',
   No='No',
+
+  Home='Home',
 }
 
 export enum Numbers {
@@ -36,7 +38,14 @@ export enum Numbers {
   SpriteSize = 16
 }
 
+export enum Colors {
+  InitialBoxShadowColor='#000',
+  InitialBoxShadowTargetColor='#a99379'
+}
+
 export enum AssetsImg {
+  Home='assets/home.png',
+
   Paint='assets/pencil.png',
   Erase='assets/erase.png',
   Pick='assets/picker.png',
@@ -49,9 +58,11 @@ export enum AssetsImg {
   Palette='assets/palette.png',
   Sprite='assets/pikachu.png',
   SpriteSheet='assets/caterpie.png',
+
+  BoxShadow='assets/box-shadow.png',
 }
 
-export enum AppScreen {
+export enum SpriteEditorScreen {
   Palette = 1,
   Sprite,
   SpriteSheet,
@@ -62,6 +73,12 @@ export enum SpriteEditorMode {
   Erase,
   Pick,
   Fill,
+}
+
+export enum Apps {
+  Home = 1,
+  SpriteEditor,
+  BoxShadow
 }
 
 export enum DbName {

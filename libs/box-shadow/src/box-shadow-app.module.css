@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  font-size: 0.9em;
 }
 
 .app {
@@ -11,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--app-background);
+  background-color: var(--background-color);
   overflow-y: auto;
 }
 
@@ -23,7 +22,7 @@
 }
 
 .control {
-  color: var(--menu-background);
+  color: var(--light-color);
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -49,7 +48,7 @@
   margin: 5%;
   display: flex;
   flex-direction: column;
-  background-color: var(--menu-background);
+  background-color: var(--light-color);
   border-radius: 10%;
   padding: 5% 10%;
 }

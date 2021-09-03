@@ -1,3 +1,3 @@
-import BoxShadowApp from './app'
+import BoxShadowApp from './box-shadow-app'
 
 export default BoxShadowApp

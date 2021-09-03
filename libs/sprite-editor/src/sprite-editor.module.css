@@ -13,8 +13,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--menu-background);
+  color: var(--light-color);
   font-size: 3em;
   line-height: 3em;
-  filter: drop-shadow(0.1em 0.25em 0.1em #140c1c);
+  filter: var(--dark-drop-shadow);
 }

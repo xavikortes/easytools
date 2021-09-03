@@ -1,4 +1,6 @@
-import { Types, AppScreen } from '@easytools/consts'
+import { Link } from 'react-router-dom'
+
+import { Types, SpriteEditorScreen, Strings, AssetsImg } from '@easytools/consts'
 import { ToolButton } from '@easytools/components'
 
 import styles from './menu.module.css'
@@ -7,15 +9,23 @@ import styles from './menu.module.css'
 type MenuProps = {
   title: string,
   screenTags?: Types.ScreenTag[],
-  isScreenActive?: (screen: AppScreen) => boolean,
-  onScreenTagClicked?: (screen: AppScreen) => void
+  isScreenActive?: (screen: SpriteEditorScreen) => boolean,
+  onScreenTagClicked?: (screen: SpriteEditorScreen) => void
 }
 
 const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuProps) => {
   return (
     <div className={ styles.menu }>
-      <span>
-        { title }
+      <span className={ styles.title }>
+        <Link to='/'>
+          <ToolButton
+            className={ styles.home }
+            img={ AssetsImg.Home }
+            title={ Strings.Home } />
+        </Link>
+        <span>
+          { title }
+        </span>
       </span>
 
       <div className={ styles.screenTags }>

@@ -1,18 +1,34 @@
-import { AppScreen, AssetsImg, Strings } from './enums'
+import { SpriteEditorScreen, AssetsImg, Strings, Apps as App } from './enums'
 
-export const menuScreenTags = [
+
+export const Apps = [
   {
-    screen: AppScreen.Palette,
+    app: App.SpriteEditor,
+    icon: AssetsImg.Sprite,
+    title: 'Sprite Editor',
+    path: '/sprite-editor'
+  },
+  {
+    app: App.BoxShadow,
+    icon: AssetsImg.BoxShadow,
+    title: 'Box-Shadow Generator',
+    path: '/box-shadow'
+  }
+]
+
+export const SpriteEditorScreenTags = [
+  {
+    screen: SpriteEditorScreen.Palette,
     icon: AssetsImg.Palette,
     title: Strings.Palette
   },
   {
-    screen: AppScreen.Sprite,
+    screen: SpriteEditorScreen.Sprite,
     icon: AssetsImg.Sprite,
     title: Strings.Sprite
   },
   {
-    screen: AppScreen.SpriteSheet,
+    screen: SpriteEditorScreen.SpriteSheet,
     icon: AssetsImg.SpriteSheet,
     title: Strings.SpriteSheet
   }
