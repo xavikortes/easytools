@@ -1,6 +1,7 @@
+import { useState } from 'react'
+
 import { Menu } from '@easytools/components'
 import { Colors, Strings } from '@easytools/consts'
-import { useState } from 'react'
 
 import styles from './box-shadow-app.module.css'
 
@@ -30,7 +31,7 @@ export function App() {
   return (
     <div className={ styles.wrapper }>
       <Menu
-        title='CSS BOX-SHADOW GENERATOR'
+        title={ Strings.BoxShadowAppTitle }
       />
       <div className={ styles.app }>
         <div className={ styles.target }

@@ -9,9 +9,13 @@
   font-weight: bold;
 }
 
-.title {
+.titleBox {
   display: flex;
   align-items: center;
+}
+
+.title {
+  text-transform: uppercase;
 }
 
 .home {

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { Menu } from '@easytools/components'
-import { Data } from '@easytools/consts'
+import { Data, Strings } from '@easytools/consts'
 
 import styles from './home-app.module.css'
 
@@ -10,7 +10,7 @@ export function App() {
   return (
     <div className={ styles.wrapper }>
       <Menu
-        title='EASY TOOLS'
+        title={ Strings.AppTitle }
       />
       <div className={ styles.app }>
         <div className={ styles.appList }>

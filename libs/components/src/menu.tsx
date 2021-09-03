@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { Types, SpriteEditorScreen, Strings, AssetsImg } from '@easytools/consts'
+import { Types, SpriteEditorScreen, Strings, AssetsImg, Routes } from '@easytools/consts'
 import { ToolButton } from '@easytools/components'
 
 import styles from './menu.module.css'
@@ -16,14 +16,14 @@ type MenuProps = {
 const Menu = ({ title, screenTags, isScreenActive, onScreenTagClicked }: MenuProps) => {
   return (
     <div className={ styles.menu }>
-      <span className={ styles.title }>
-        <Link to='/'>
+      <span className={ styles.titleBox }>
+        <Link to={ Routes.Home }>
           <ToolButton
             className={ styles.home }
             img={ AssetsImg.Home }
             title={ Strings.Home } />
         </Link>
-        <span>
+        <span className={ styles.title }>
           { title }
         </span>
       </span>

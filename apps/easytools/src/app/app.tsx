@@ -5,6 +5,7 @@ import SpriteEditorApp from '@easytools/sprite-editor'
 import { BoxShadowApp } from '@easytools/css-generators'
 
 import styles from './app.module.css'
+import { Routes } from '@easytools/consts'
 
 
 export function App() {
@@ -12,13 +13,13 @@ export function App() {
     <div className={ styles.container }>
       <HashRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={ Routes.Home }>
             <HomeApp />
           </Route>
-          <Route path="/sprite-editor">
+          <Route path={ Routes.SpriteEditor }>
             <SpriteEditorApp />
           </Route>
-          <Route path="/box-shadow">
+          <Route path={ Routes.BoxShadow }>
             <BoxShadowApp />
           </Route>
         </Switch>

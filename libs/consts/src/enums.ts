@@ -30,6 +30,10 @@ export enum Strings {
   No='No',
 
   Home='Home',
+
+  AppTitle='Easy Tools',
+  SpriteEditorAppTitle='Sprite Editor',
+  BoxShadowAppTitle='Box-Shadow Generator',
 }
 
 export enum Numbers {
@@ -79,6 +83,12 @@ export enum Apps {
   Home = 1,
   SpriteEditor,
   BoxShadow
+}
+
+export enum Routes {
+  Home = '/',
+  SpriteEditor = '/sprite-editor',
+  BoxShadow = '/box-shadow',
 }
 
 export enum DbName {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Types, SpriteEditorScreen, Numbers, Data } from '@easytools/consts'
+import { Types, SpriteEditorScreen, Numbers, Data, Strings } from '@easytools/consts'
 import { Menu } from '@easytools/components'
 
 import PaletteEditor from './palette-editor'
@@ -96,7 +96,7 @@ export function App() {
   return (
     <div className={ styles.wrapper }>
       <Menu
-        title='SPRITE EDITOR'
+        title={ Strings.SpriteEditorAppTitle }
         screenTags={ Data.SpriteEditorScreenTags }
         isScreenActive={ tag => tag === screen }
         onScreenTagClicked={ tag => setScreen(tag) }

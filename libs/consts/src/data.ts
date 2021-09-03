@@ -1,18 +1,18 @@
-import { SpriteEditorScreen, AssetsImg, Strings, Apps as App } from './enums'
+import { SpriteEditorScreen, AssetsImg, Strings, Apps as App, Routes } from './enums'
 
 
 export const Apps = [
   {
     app: App.SpriteEditor,
     icon: AssetsImg.Sprite,
-    title: 'Sprite Editor',
-    path: '/sprite-editor'
+    title: Strings.SpriteEditorAppTitle,
+    path: Routes.SpriteEditor
   },
   {
     app: App.BoxShadow,
     icon: AssetsImg.BoxShadow,
-    title: 'Box-Shadow Generator',
-    path: '/box-shadow'
+    title: Strings.BoxShadowAppTitle,
+    path: Routes.BoxShadow
   }
 ]
 
