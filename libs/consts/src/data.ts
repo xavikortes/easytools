@@ -13,6 +13,12 @@ export const Apps = [
     icon: AssetsImg.BoxShadow,
     title: Strings.BoxShadowAppTitle,
     path: Routes.BoxShadow
+  },
+  {
+    app: App.BorderRadius,
+    icon: AssetsImg.BorderRadius,
+    title: Strings.BorderRadiusAppTitle,
+    path: Routes.BorderRadius
   }
 ]
 

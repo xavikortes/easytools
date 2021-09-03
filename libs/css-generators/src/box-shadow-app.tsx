@@ -105,6 +105,7 @@ export function App() {
         </span>
         <div className={ styles.code }>
           <span>-webkit-box-shadow: { boxShadowValue };</span>
+          <span>-moz-box-shadow: { boxShadowValue };</span>
           <span>box-shadow: { boxShadowValue };</span>
         </div>
       </div>

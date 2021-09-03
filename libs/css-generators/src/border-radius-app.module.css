@@ -19,6 +19,7 @@
   width: 50%;
   height: 0;
   padding-bottom: 50%;
+  background-color: #a99379;
 }
 
 .control {
@@ -52,3 +53,4 @@
   border-radius: 30px;
   padding: 5% 10%;
 }
+  

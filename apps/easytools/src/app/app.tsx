@@ -2,7 +2,10 @@ import { HashRouter, Switch, Route } from 'react-router-dom'
 
 import HomeApp from '@easytools/home'
 import SpriteEditorApp from '@easytools/sprite-editor'
-import { BoxShadowApp } from '@easytools/css-generators'
+import {
+  BoxShadowApp,
+  BorderRadiusApp
+} from '@easytools/css-generators'
 
 import styles from './app.module.css'
 import { Routes } from '@easytools/consts'
@@ -21,6 +24,9 @@ export function App() {
           </Route>
           <Route path={ Routes.BoxShadow }>
             <BoxShadowApp />
+          </Route>
+          <Route path={ Routes.BorderRadius }>
+            <BorderRadiusApp />
           </Route>
         </Switch>
       </HashRouter>

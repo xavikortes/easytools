@@ -26,6 +26,11 @@ export enum Strings {
   Inset='Inset',
   TargetColor='Target Color',
 
+  TopLeft='Top Left',
+  TopRight='Top Right',
+  BottomRight='Bottom Right',
+  BottomLeft='Bottom Left',
+
   Yes='Yes',
   No='No',
 
@@ -34,6 +39,7 @@ export enum Strings {
   AppTitle='Easy Tools',
   SpriteEditorAppTitle='Sprite Editor',
   BoxShadowAppTitle='Box-Shadow Generator',
+  BorderRadiusAppTitle='Border-Radius Generator',
 }
 
 export enum Numbers {
@@ -64,6 +70,7 @@ export enum AssetsImg {
   SpriteSheet='assets/caterpie.png',
 
   BoxShadow='assets/box-shadow.png',
+  BorderRadius='assets/border-radius.png',
 }
 
 export enum SpriteEditorScreen {
@@ -82,15 +89,17 @@ export enum SpriteEditorMode {
 export enum Apps {
   Home = 1,
   SpriteEditor,
-  BoxShadow
+  BoxShadow,
+  BorderRadius,
 }
 
 export enum Routes {
-  Home = '/',
-  SpriteEditor = '/sprite-editor',
-  BoxShadow = '/box-shadow',
+  Home='/',
+  SpriteEditor='/sprite-editor',
+  BoxShadow='/box-shadow',
+  BorderRadius='/border-radius',
 }
 
 export enum DbName {
-  PaletteList = 'paletteList',
+  PaletteList='paletteList',
 }
