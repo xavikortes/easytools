@@ -16,6 +16,18 @@ export enum Strings {
   SpriteSheet='SpriteSheet',
 
   NotImplemented='Not Implemented',
+
+  ShiftRight='Hor. Offset',
+  ShiftDown='Ver. Offset',
+  Blur='Blur',
+  Spread='Spread',
+  Color='Color',
+  Opacity='Opacity',
+  Inset='Inset',
+  TargetColor='Target Color',
+
+  Yes='Yes',
+  No='No',
 }
 
 export enum Numbers {
