@@ -1,22 +1,22 @@
 {
   "version": 2,
   "projects": {
-    "box-shadow": {
-      "root": "libs/box-shadow",
-      "sourceRoot": "libs/box-shadow/src",
+    "css-generators": {
+      "root": "libs/css-generators",
+      "sourceRoot": "libs/css-generators/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/box-shadow/**/*.{ts,tsx,js,jsx}"]
+            "lintFilePatterns": ["libs/css-generators/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/box-shadow"],
+          "outputs": ["coverage/libs/css-generators"],
           "options": {
-            "jestConfig": "libs/box-shadow/jest.config.js",
+            "jestConfig": "libs/css-generators/jest.config.js",
             "passWithNoTests": true
           }
         }

@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@easytools/box-shadow": ["libs/box-shadow/src/index.ts"],
+      "@easytools/css-generators": ["libs/css-generators/src/index.ts"],
       "@easytools/components": ["libs/components/src/index.ts"],
       "@easytools/consts": ["libs/consts/src/index.ts"],
       "@easytools/home": ["libs/home/src/index.ts"],
