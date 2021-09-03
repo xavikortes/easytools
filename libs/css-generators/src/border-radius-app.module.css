@@ -20,6 +20,7 @@
   height: 0;
   padding-bottom: 50%;
   background-color: #a99379;
+  box-shadow: var(--dark-shadow);
 }
 
 .control {
