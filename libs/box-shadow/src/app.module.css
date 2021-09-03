@@ -1,0 +1,55 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  font-size: 0.9em;
+}
+
+.app {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--app-background);
+  overflow-y: auto;
+}
+
+.target {
+  margin: 10% 0% 15%;
+  width: 50%;
+  height: 0;
+  padding-bottom: 50%;
+}
+
+.control {
+  color: var(--menu-background);
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1%;
+}
+
+.controlName {
+  flex-basis: 30%;
+  margin-left: 5%;
+}
+
+.controlValue {
+  flex-basis: 25%;
+  text-align: right;
+  margin-right: 5%;
+}
+
+.input {
+  flex-basis: 45%;
+}
+
+.code {
+  margin: 5%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--menu-background);
+  border-radius: 10%;
+  padding: 5% 10%;
+}
